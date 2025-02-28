@@ -34,10 +34,11 @@ user-friendly and efficient. By leveraging modern technology, we aim to
 enhance the reading experience, support book enthusiasts, and help
 bookstores thrive in the digital age
 
-Team Leader: Youssef Emad 
-Team Member: Menna Ayman 
-Team Member: Fady Monier 
-Team Member: Sara Sobhy 
-Team Member: Eman Osama 
-Team Member: Roaa Ahmed
-Team Member: Noura Mostafa
+**Members :**
+- Youssef Emad (Team Leader)
+- Menna Ayman
+- Fady Monier
+- Roaa Ahmed
+- Eman Osama
+- Noura Mostafa
+- Sara Sobhy
