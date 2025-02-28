@@ -41,8 +41,8 @@ export default function About() {
           user-friendly and efficient. By leveraging modern technology, we aim to
           enhance the reading experience, support book enthusiasts, and help
           bookstores thrive in the digital age.{"\n\n"}
-          <Text style={{ fontWeight: "bold" }}>Team Leader:</Text> Youssef Emad{"\n"}
           <Text style={{ fontWeight: "bold" }}>Team Members:</Text>{"\n"}
+          - Youssef Emad (Team Leader) {"\n"}
           - Menna Ayman{"\n"}
           - Fady monier{"\n"}
           - Sara Sobhy{"\n"}
