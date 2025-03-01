@@ -1,5 +1,5 @@
 import { View, Text, Image, FlatList, StyleSheet } from "react-native";
-
+import fallBK from "../assets/FallBack.png"
 const products = [
   {
     id: "1",
@@ -44,14 +44,17 @@ export default function Products() {
         renderItem={({ item }) => (
           <View style={styles.productCard}>
             <Image
-              source={{uri : item.image}}
+              source={item.image ? {uri : item.image} : fallBK }
               style={styles.productImage}
-              resizeMode="cover"
             />
             <Text style={styles.productName}>{item.name}</Text>
 
             <Text style={styles.productDescription}>
-              {item.description}
+              {item.description ? 
+               item.description.length > 100 ? 
+               item.description.slice(0,100) + "..." :
+               item.description :
+               "No description available."}
             </Text>
 
             <Text style={styles.productPrice}>{item.price}</Text>
