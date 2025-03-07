@@ -1,7 +1,7 @@
 import { View, Text, Image, FlatList, StyleSheet } from "react-native";
-import BookCard from "./components/BookCard";
+import BookCard from "./BookCard";
 
-const products = [
+const Books = [
   {
     id: "1",
     name: "The Alchemist",
@@ -38,13 +38,11 @@ const products = [
   },
 ];
 
-export default function Products() {
+export default function BookList() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>📚 Available Books</Text>
-      
+    <View style={styles.container}>      
       <FlatList
-        data={products}
+        data={Books}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <BookCard
@@ -69,43 +67,12 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: "#f5f5f5",
+    maxHeight: 300
   },
   heading: {
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 20,
-  },
-  productCard: {
-    backgroundColor: "white",
-    padding: 16,
-    borderRadius: 10,
-    marginBottom: 16,
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  productImage: {
-    width: "100%",
-    height: 150,
-    borderRadius: 8,
-    backgroundColor: "#ddd",
-  },
-  productName: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginTop: 10,
-  },
-  productDescription: {
-    fontSize: 14,
-    color: "#666",
-    marginTop: 5,
-  },
-  productPrice: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#007bff",
-    marginTop: 10,
-  },
+  }
 });
