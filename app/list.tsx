@@ -1,6 +1,5 @@
 import { View, Text, Image, FlatList, StyleSheet } from "react-native";
 import BookCard from "./components/BookCard";
-import fallBK from "../assets/FallBack.png"
 
 const products = [
   {
@@ -53,7 +52,7 @@ export default function Products() {
             title={item.name}
             author={item.author || "Unknown Author"}
             price={item.price}
-            image={item.image ? item.image : fallBK} 
+            image={item.image} 
        />
           )}
        horizontal={true} 
