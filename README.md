@@ -1,4 +1,4 @@
-# Welcom to BooXtore
+# Welcome to BooXtore
 
 ### Why BooXotre ?
 
