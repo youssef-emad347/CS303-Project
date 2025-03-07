@@ -3,6 +3,8 @@ import BookList from "./components/bookList";
 import logo from "../assets/logo.png";
 import About from "../app/about";
 import { ScrollView } from "react-native-gesture-handler";
+
+
 export default function Index() {
   return (
     <ScrollView>
