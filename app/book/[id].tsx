@@ -1,5 +1,5 @@
 import { useLocalSearchParams } from "expo-router";
-import BookDetails from "./components/BookDetails"; 
+import BookDetails from "../components/BookDetails"; 
 
 export default function BookDetailsScreen() {
   const { id } = useLocalSearchParams(); 
