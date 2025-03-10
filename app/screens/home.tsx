@@ -1,17 +1,25 @@
 import { Pressable, Text, View ,Image ,StyleSheet } from "react-native";
-import BookList from "./components/bookList";
-import logo from "../assets/logo.png";
-import About from "./screens/about";
+
+import logo from "../../assets/logo.png";
+
 import { ScrollView } from "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
-import { BottomNavigator } from "./screens/bottom_navigation";
+import BookList from "../components/bookList";
+import About from "./about";
 
 
-export default function Index() {
+export default function Home() {
   return (
-    // <NavigationContainer>
-      <BottomNavigator/>
-    // </NavigationContainer>
+    <ScrollView>
+    <View style={styles.headerContainer}>
+      <Image source={logo} style={styles.image} />
+      <Text> Search Bar</Text>
+    </View>
+    <BookList />
+    <View>
+    <Text style= {styles.header}> About project</Text>
+    <About />
+    </View>
+    </ScrollView>
   );
 }
 

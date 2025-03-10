@@ -51,7 +51,7 @@ export default function BookList() {
             author={item.author || "Unknown Author"}
             price={item.price}
             image={item.image} 
-       />
+        />
           )}
        horizontal={true} 
        showsHorizontalScrollIndicator={false} 
