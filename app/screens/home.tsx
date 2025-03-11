@@ -6,15 +6,21 @@ import { ScrollView } from "react-native-gesture-handler";
 import BookList from "../components/bookList";
 import About from "./about";
 
+import { useState } from "react";
+import SearchBar from "../components/SearchBar"; 
 
 export default function Home() {
+  const [searchQuery, setSearchQuery] = useState("");
+
   return (
     <ScrollView>
     <View style={styles.headerContainer}>
-      <Image source={logo} style={styles.image} />
-      <Text> Search Bar</Text>
+      {/* <Image source={logo} style={styles.image} />
+      <Text> Search Bar</Text> */}
     </View>
-    <BookList />
+    <SearchBar onSearch={setSearchQuery} />
+    <BookList searchQuery={searchQuery} />
+    {/* <BookList /> */}
     <View>
     <Text style= {styles.header}> About project</Text>
     <About />

@@ -38,11 +38,19 @@ const Books = [
   },
 ];
 
-export default function BookList() {
+interface bookListProps {
+  searchQuery: string; 
+}
+export default function BookList({ searchQuery }: bookListProps) {
+
+  const filteredBooks = Books.filter((book) =>
+    book.name.toLowerCase().includes(searchQuery.toLowerCase()) 
+  );
+
   return (
     <View style={styles.container}>      
       <FlatList
-        data={Books}
+        data={filteredBooks}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <BookCard
@@ -51,7 +59,7 @@ export default function BookList() {
             author={item.author || "Unknown Author"}
             price={item.price}
             image={item.image} 
-        />
+         />
           )}
        horizontal={true} 
        showsHorizontalScrollIndicator={false} 
@@ -61,7 +69,6 @@ export default function BookList() {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
