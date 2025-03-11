@@ -17,7 +17,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        placeholder="Search "
+        placeholder="Search"
         value={query}
         onChangeText={handleSearch} 
       />

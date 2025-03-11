@@ -1,4 +1,4 @@
-import { View, Text, Image, FlatList, StyleSheet } from "react-native";
+import { View, FlatList, StyleSheet } from "react-native";
 import BookCard from "./BookCard";
 
 const Books = [
@@ -44,7 +44,7 @@ interface bookListProps {
 export default function BookList({ searchQuery }: bookListProps) {
 
   const filteredBooks = Books.filter((book) =>
-    book.name.toLowerCase().includes(searchQuery.toLowerCase()) 
+    book.name.toLowerCase().startsWith(searchQuery.toLowerCase()) 
   );
 
   return (
