@@ -5,6 +5,7 @@ import BookList from "../components/BookList";
 import About from "../screens/about";
 import { useState } from "react";
 import SearchBar from "../components/SearchBar";
+import AuthorList from "../components/AuthorList";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
