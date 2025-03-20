@@ -1,7 +1,9 @@
 import React from "react";
-import { Text, Image, Pressable, StyleSheet } from "react-native";
+import { Text, Image, Pressable, StyleSheet , View} from "react-native";
 import { useRouter } from "expo-router";
 import fallback from "../../assets/FallBack.png"
+import WishlistButton from "./WishlistButton";
+
 
 
 interface BookCardProps {
@@ -19,6 +21,11 @@ const BookCard: React.FC<BookCardProps> = ({ id, title, author, price, image }) 
     <Pressable style={styles.card} 
     onPress={() => router.push(`/book/${id}`)}>
       <Image source={image ? { uri: image } : fallback} style={styles.image} />
+      
+      <View style={styles.wishlistContainer}>  
+        <WishlistButton onToggle={(isWishlisted) => console.log(`${title} wishlist status:`, isWishlisted)} /> 
+      </View>  
+
       <Text style={styles.title} numberOfLines={1}>{title}</Text>
       <Text style={styles.author} numberOfLines={1}>{author}</Text>
       <Text style={styles.price}>{price}</Text>
@@ -41,6 +48,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 13,
+    position: "relative",
   },
   image: {
     width: 100,
@@ -49,6 +57,13 @@ const styles = StyleSheet.create({
   },
   details: {
     alignItems: "center",
+  },
+
+
+  wishlistContainer: { 
+    position: "absolute",
+    bottom : -2,
+    right: -1,
   },
   title: {
     fontSize: 14,
