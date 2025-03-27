@@ -5,11 +5,13 @@ import BookList from "../components/BookList";
 import About from "../screens/about";
 import { useState } from "react";
 import SearchBar from "../components/SearchBar";
+import AuthorList from "../components/AuthorList";
 
 export default function Home() {
   return (
     <ScrollView>
       <BookList />
+      <AuthorList />
       <View>
         <Text style={styles.header}> About project</Text>
         <About />
