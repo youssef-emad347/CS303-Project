@@ -38,19 +38,19 @@ const Books = [
   },
 ];
 
-interface bookListProps {
-  searchQuery: string; 
-}
-export default function BookList({ searchQuery }: bookListProps) {
+// interface bookListProps {
+//   searchQuery: string; 
+// }
+export default function BookList() {
 
-  const filteredBooks = Books.filter((book) =>
-    book.name.toLowerCase().startsWith(searchQuery.toLowerCase()) 
-  );
+  // const filteredBooks = Books.filter((book) =>
+  //   book.name.toLowerCase().startsWith(searchQuery.toLowerCase()) 
+  // );
 
   return (
     <View style={styles.container}>      
       <FlatList
-        data={filteredBooks}
+        data={Books}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <BookCard
