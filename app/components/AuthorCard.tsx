@@ -23,12 +23,12 @@ const AuthorCard: React.FC<AuthorCardProps> = ({ name, bio, nationality, image }
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "#FFFFFF",
-    padding: 10,
+    padding: 20,
     margin: 10,
     borderRadius: 10,
     alignItems: "center",
     width: 140, 
-    minHeight: 230, 
+    minHeight: 210, 
     alignSelf: "flex-start",
   },
   image: {
