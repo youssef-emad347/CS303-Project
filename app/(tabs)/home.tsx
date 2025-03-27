@@ -19,6 +19,7 @@ export default function Home() {
         </View>
       </View>
       <BookList searchQuery={searchQuery} />
+      <AuthorList />
       <View>
         <Text style={styles.header}> About project</Text>
         <About />
