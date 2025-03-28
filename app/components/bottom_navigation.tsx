@@ -17,11 +17,11 @@ import WishList from "../screens/wishlist";
 const Tab = createBottomTabNavigator();
 const BottomNavigator = () => {
   return (
-    <Tab.Navigator screenOptions={{headerShown: false , tabBarShowLabel: false}}>
+    <Tab.Navigator screenOptions={{headerShown: false}}>
       <Tab.Screen
         name="Home"
         component={Home}
-        options={{  
+        options={{
           tabBarInactiveTintColor: disableColor,
           tabBarActiveTintColor: mainColor,
           tabBarIcon: ({ focused }) => (
