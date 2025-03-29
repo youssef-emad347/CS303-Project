@@ -1,6 +1,8 @@
 import { FlatList, View } from "react-native";
-import React, { useState } from "react";
-import RenderWhishList from "../components/renderWhishList";
+import React, { useState ,useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import WishlistItem from "../components/WishlistItem";
+import { WhishListItem } from "@/utils/types";
 
 const WishList: React.FC = () => {
   
@@ -44,6 +46,41 @@ const WishList: React.FC = () => {
  
   const handleRemove = (index: number) => {
     setWishList((prevList) => prevList.filter((_, i) => i !== index));
+  }
+
+  const [cart, setCart] = useState<WhishListItem[]>([]); 
+
+  useEffect(() => {
+    loadCart(); 
+  }, []);
+
+  const saveCart = async (cartItems: WhishListItem[]) => {
+    try {
+      await AsyncStorage.setItem("cart", JSON.stringify(cartItems));
+    } catch (error) {
+      console.error("Error saving cart", error);
+    }
+  };
+
+  const loadCart = async () => {
+    try {
+      const savedCart = await AsyncStorage.getItem("cart");
+      if (savedCart) {
+        setCart(JSON.parse(savedCart)); 
+      }
+    } catch (error) {
+      console.error("Error loading cart", error);
+    }
+  };
+
+  const handleAddToCart = (item: WhishListItem) => {
+
+    const itemExists = cart.some(cartItem => cartItem.title === item.title);
+    if (!itemExists) { 
+      const updatedCart = [...cart, item]; 
+      setCart(updatedCart);
+      saveCart(updatedCart);
+    }
   };
 
   return (
@@ -54,7 +91,8 @@ const WishList: React.FC = () => {
         keyExtractor={(item, index) => index.toString()} 
         renderItem={({ item, index }) => (
          
-          <RenderWhishList item={item} onRemove={() => handleRemove(index)} />
+          <WishlistItem item={item} onRemove={() => setWishList((prev) => prev.filter((_, i) => i !== index))}
+          onAddToCart={() => handleAddToCart(item)}/>
         )}
       />
     </View>

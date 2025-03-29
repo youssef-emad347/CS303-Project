@@ -2,17 +2,22 @@ import { Pressable, Text, View ,Image ,StyleSheet } from "react-native";
 
 
 
+
+
+
 export default function Profile() {
+  
   return (
-    <View>
+    <View style={styles.container}>
         <Text style={styles.header}>Profile</Text>
-    </View>
-  );
-}
+
+      </View>
+    );
+  }
 
 
 const styles = StyleSheet.create({
-  contianer:{
+  container:{
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -22,5 +27,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     textAlign: "center",
-  },
+},
+
 });

@@ -65,7 +65,7 @@ const BottomNavigator = () => {
       />
 
 
-<Tab.Screen
+{/* <Tab.Screen
         name="Wishlist"
         component={WishList}
         options={{
@@ -79,7 +79,7 @@ const BottomNavigator = () => {
             />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name="Profile"
         component={Profile}

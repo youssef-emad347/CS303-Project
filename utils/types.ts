@@ -1,4 +1,4 @@
-interface WhishListItem {
+export interface WhishListItem {
     title: string;
     name: string;
     details: string;
