@@ -6,14 +6,23 @@ interface ProductProps {
   author: string;
   price: string;
   imageUrl: string;
-  onDelete?: (id: string) => void; 
+  onDelete: (id: string) => void;
 }
 
 const CartItem: React.FC<ProductProps> = ({ id, name, author, price, imageUrl , onDelete }) => {
-  const [quantity, setQuantity] = useState(0);
-  const handleDelPress = () => {
-    setQuantity(0);       
-    Alert.alert('Item Deleted!');
+  const [quantity, setQuantity] = useState(1);
+  const handleDelete = () => {
+    Alert.alert(
+      "Delete Item",
+      "Are you sure you want to delete this item?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => onDelete(id) }
+      ]
+    );
   };
   return (
     <View style={styles.container}>
@@ -32,7 +41,7 @@ const CartItem: React.FC<ProductProps> = ({ id, name, author, price, imageUrl , 
       <View style={styles.actions}>
         <Pressable 
           style={styles.button} 
-          onPress={() => setQuantity(q => Math.max(0, q - 1))}
+          onPress={() => setQuantity(q => Math.max(1, q - 1))}
         >
           <Text>-</Text>
         </Pressable>
@@ -49,7 +58,7 @@ const CartItem: React.FC<ProductProps> = ({ id, name, author, price, imageUrl , 
 
       <Pressable 
         style={styles.deleteButton}
-        onPress={handleDelPress }
+        onPress={() => onDelete(id)}
       >
           <Image
             source={require('../../assets/images/del.png')}
