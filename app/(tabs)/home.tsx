@@ -11,6 +11,9 @@ export default function Home() {
   return (
     <ScrollView>
       <BookList />
+
+      <AuthorList />
+
       <View>
         <Text style={styles.header}> About project</Text>
         <About />
