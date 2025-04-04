@@ -1,10 +1,8 @@
 import React from "react";
-import { Text, Image, Pressable, StyleSheet , View} from "react-native";
+import { Text, Image, Pressable, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
-import fallback from "../../assets/FallBack.png"
+import fallback from "../../assets/FallBack.png";
 import WishlistButton from "./WishlistButton";
-
-
 
 interface BookCardProps {
   id: string;
@@ -14,24 +12,34 @@ interface BookCardProps {
   image: string;
 }
 
-const BookCard: React.FC<BookCardProps> = ({ id, title, author, price, image }) => {
+const BookCard: React.FC<BookCardProps> = ({
+  id,
+  title,
+  author,
+  price,
+  image,
+}) => {
   const router = useRouter();
 
   return (
-    <Pressable style={styles.card} 
-    onPress={() => router.push(`/book/${id}`)}>
+    <Pressable style={styles.card} onPress={() => router.push(`/book/${id}`)}>
+      <View style={styles.wishlistContainer}>
+        <WishlistButton
+          onToggle={(isWishlisted) =>
+            console.log(`${title} wishlist status:`, isWishlisted)
+          }
+        />
+      </View>
       <Image source={image ? { uri: image } : fallback} style={styles.image} />
-      
-      <View style={styles.wishlistContainer}>  
-        <WishlistButton onToggle={(isWishlisted) => console.log(`${title} wishlist status:`, isWishlisted)} /> 
-      </View>  
-
-      <Text style={styles.title} numberOfLines={1}>{title}</Text>
-      <Text style={styles.author} numberOfLines={1}>{author}</Text>
+      <Text style={styles.title} numberOfLines={1}>
+        {title}
+      </Text>
+      <Text style={styles.author} numberOfLines={1}>
+        {author}
+      </Text>
       <Text style={styles.price}>{price}</Text>
     </Pressable>
   );
-  
 };
 
 const styles = StyleSheet.create({
@@ -41,9 +49,9 @@ const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 10,
     alignItems: "center",
-    width: 140, 
-    minHeight: 230, 
-    alignSelf: "flex-start", 
+    width: 140,
+    minHeight: 230,
+    alignSelf: "flex-start",
     shadowColor: "#0D1110",
     shadowOpacity: 0.1,
     shadowRadius: 5,
@@ -59,11 +67,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-
-  wishlistContainer: { 
+  wishlistContainer: {
     position: "absolute",
-    bottom : -2,
-    right: -1,
+    zIndex: 1,
+    top: 10,
+    right: 10,
   },
   title: {
     fontSize: 14,

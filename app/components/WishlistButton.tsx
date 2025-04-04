@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TouchableOpacity, StyleSheet } from 'react-native';
+import { TouchableOpacity, StyleSheet, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 interface WishlistButtonProps {
@@ -18,15 +18,17 @@ const WishlistButton: React.FC<WishlistButtonProps> = ({ onToggle }) => {
   };
 
   return (
-    <TouchableOpacity onPress={toggleWishlist} style={styles.button}>
-      <Icon name={isWishlisted ? 'heart' : 'heart-o'} size={23} color={isWishlisted ? 'red' : 'gray'} />
-    </TouchableOpacity>
+    <Pressable onPress={toggleWishlist} style={styles.button}>
+      <Icon name={isWishlisted ? 'heart' : 'heart-o'} size={18} color={isWishlisted ? 'red' : 'gray'} />
+    </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
-    padding: 10,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 8,
   },
 });
 
