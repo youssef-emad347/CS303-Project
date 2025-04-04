@@ -1,6 +1,6 @@
-import React from 'react';
-import { FlatList , SafeAreaView, StyleSheet , View , Text } from 'react-native';
-import CartItem from  '.././components/cartItem';
+import { useState } from "react";
+import { FlatList, ScrollView, StyleSheet, View, Text } from "react-native";
+import CartItem from "../components/cartItem";
 
 const App: React.FC = () => {
   const item = [
@@ -19,7 +19,8 @@ const App: React.FC = () => {
       description:
         "This book provides a practical guide to building good habits and breaking bad ones.",
       price: "$12.99",
-      image: "https://m.media-amazon.com/images/I/91bYsX41DVL._AC_UF1000,1000_QL80_.jpg",
+      image:
+        "https://m.media-amazon.com/images/I/91bYsX41DVL._AC_UF1000,1000_QL80_.jpg",
     },
     {
       id: "3",
@@ -28,7 +29,8 @@ const App: React.FC = () => {
       description:
         "A dystopian novel by George Orwell that explores the dangers of totalitarianism and extreme political ideology. The novel introduces the concept of Big Brother, mass surveillance, and thought control in a society where the government manipulates truth and reality.",
       price: "$9.99",
-      image: "https://m.media-amazon.com/images/I/71kxa1-0mfL._AC_UF1000,1000_QL80_.jpg",
+      image:
+        "https://m.media-amazon.com/images/I/71kxa1-0mfL._AC_UF1000,1000_QL80_.jpg",
     },
     {
       id: "4",
@@ -36,7 +38,8 @@ const App: React.FC = () => {
       author: "",
       description: "", // Missing description
       price: "$8.99",
-      image: "https://m.media-amazon.com/images/I/81bsw6fnUiL._AC_UF1000,1000_QL80_.jpg",
+      image:
+        "https://m.media-amazon.com/images/I/81bsw6fnUiL._AC_UF1000,1000_QL80_.jpg",
     },
     {
       id: "5",
@@ -53,7 +56,8 @@ const App: React.FC = () => {
       description:
         "This book provides a practical guide to building good habits and breaking bad ones.",
       price: "$12.99",
-      image: "https://m.media-amazon.com/images/I/91bYsX41DVL._AC_UF1000,1000_QL80_.jpg",
+      image:
+        "https://m.media-amazon.com/images/I/91bYsX41DVL._AC_UF1000,1000_QL80_.jpg",
     },
     {
       id: "7",
@@ -62,7 +66,8 @@ const App: React.FC = () => {
       description:
         "A dystopian novel by George Orwell that explores the dangers of totalitarianism and extreme political ideology. The novel introduces the concept of Big Brother, mass surveillance, and thought control in a society where the government manipulates truth and reality.",
       price: "$9.99",
-      image: "https://m.media-amazon.com/images/I/71kxa1-0mfL._AC_UF1000,1000_QL80_.jpg",
+      image:
+        "https://m.media-amazon.com/images/I/71kxa1-0mfL._AC_UF1000,1000_QL80_.jpg",
     },
     {
       id: "8",
@@ -70,7 +75,8 @@ const App: React.FC = () => {
       author: "",
       description: "", // Missing description
       price: "$8.99",
-      image: "https://m.media-amazon.com/images/I/81bsw6fnUiL._AC_UF1000,1000_QL80_.jpg",
+      image:
+        "https://m.media-amazon.com/images/I/81bsw6fnUiL._AC_UF1000,1000_QL80_.jpg",
     },
     {
       id: "9",
@@ -87,7 +93,8 @@ const App: React.FC = () => {
       description:
         "This book provides a practical guide to building good habits and breaking bad ones.",
       price: "$12.99",
-      image: "https://m.media-amazon.com/images/I/91bYsX41DVL._AC_UF1000,1000_QL80_.jpg",
+      image:
+        "https://m.media-amazon.com/images/I/91bYsX41DVL._AC_UF1000,1000_QL80_.jpg",
     },
     {
       id: "11",
@@ -96,7 +103,8 @@ const App: React.FC = () => {
       description:
         "A dystopian novel by George Orwell that explores the dangers of totalitarianism and extreme political ideology. The novel introduces the concept of Big Brother, mass surveillance, and thought control in a society where the government manipulates truth and reality.",
       price: "$9.99",
-      image: "https://m.media-amazon.com/images/I/71kxa1-0mfL._AC_UF1000,1000_QL80_.jpg",
+      image:
+        "https://m.media-amazon.com/images/I/71kxa1-0mfL._AC_UF1000,1000_QL80_.jpg",
     },
     {
       id: "12",
@@ -104,7 +112,8 @@ const App: React.FC = () => {
       author: "",
       description: "", // Missing description
       price: "$8.99",
-      image: "https://m.media-amazon.com/images/I/81bsw6fnUiL._AC_UF1000,1000_QL80_.jpg",
+      image:
+        "https://m.media-amazon.com/images/I/81bsw6fnUiL._AC_UF1000,1000_QL80_.jpg",
     },
     {
       id: "13",
@@ -121,7 +130,8 @@ const App: React.FC = () => {
       description:
         "This book provides a practical guide to building good habits and breaking bad ones.",
       price: "$12.99",
-      image: "https://m.media-amazon.com/images/I/91bYsX41DVL._AC_UF1000,1000_QL80_.jpg",
+      image:
+        "https://m.media-amazon.com/images/I/91bYsX41DVL._AC_UF1000,1000_QL80_.jpg",
     },
     {
       id: "15",
@@ -130,7 +140,8 @@ const App: React.FC = () => {
       description:
         "A dystopian novel by George Orwell that explores the dangers of totalitarianism and extreme political ideology. The novel introduces the concept of Big Brother, mass surveillance, and thought control in a society where the government manipulates truth and reality.",
       price: "$9.99",
-      image: "https://m.media-amazon.com/images/I/71kxa1-0mfL._AC_UF1000,1000_QL80_.jpg",
+      image:
+        "https://m.media-amazon.com/images/I/71kxa1-0mfL._AC_UF1000,1000_QL80_.jpg",
     },
     {
       id: "16",
@@ -138,28 +149,27 @@ const App: React.FC = () => {
       author: "",
       description: "", // Missing description
       price: "$8.99",
-      image: "https://m.media-amazon.com/images/I/81bsw6fnUiL._AC_UF1000,1000_QL80_.jpg",
+      image:
+        "https://m.media-amazon.com/images/I/81bsw6fnUiL._AC_UF1000,1000_QL80_.jpg",
     },
   ];
 
   const handleDelete = (id: string) => {
-    setItems(currentItems => currentItems.filter(item => item.id !== id));
+    setItems((currentItems) => currentItems.filter((item) => item.id !== id));
   };
-  const [items, setItems] = React.useState(item);
-  
+  const [items, setItems] = useState(item);
+
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={{ 
-        paddingVertical: 5,
-        backgroundColor: 'white',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
-        elevation: 2,
-        marginBottom: 5
-      }}>
-        <Text style={{ fontSize: 24, fontWeight: 'bold', padding: 5, textAlign: 'center' }}>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text
+          style={{
+            fontSize: 24,
+            fontWeight: "bold",
+            padding: 5,
+            textAlign: "center",
+          }}
+        >
           Shopping Cart
         </Text>
       </View>
@@ -173,11 +183,16 @@ const App: React.FC = () => {
             name={item.name}
             author={item.author || "Unknown Author"}
             price={item.price}
+            description={
+              item.description.length > 100
+                ? item.description.slice(0, 100) + "..."
+                : item.description || "No description available."
+            }
             onDelete={handleDelete}
           />
         )}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -185,8 +200,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  header: {
+    paddingVertical: 5,
+    backgroundColor: "white",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+    marginBottom: 5,
+  },
 });
 
 export default App;
-
-
