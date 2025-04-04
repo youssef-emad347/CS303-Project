@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList , SafeAreaView, StyleSheet } from 'react-native';
+import { FlatList , SafeAreaView, StyleSheet , View , Text } from 'react-native';
 import CartItem from  '.././components/cartItem';
 
 const App: React.FC = () => {
@@ -141,22 +141,42 @@ const App: React.FC = () => {
       image: "https://m.media-amazon.com/images/I/81bsw6fnUiL._AC_UF1000,1000_QL80_.jpg",
     },
   ];
+
+  const handleDelete = (id: string) => {
+    setItems(currentItems => currentItems.filter(item => item.id !== id));
+  };
+  const [items, setItems] = React.useState(item);
   
   return (
     <SafeAreaView style={styles.container}>
-    <FlatList
-      data={item}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => (
-        <CartItem
-          id={item.id}
-          imageUrl={ item.image} 
-          name={item.name}
-          author={item.author || "Unknown Author"}
-          price={item.price}
-        />
-      )}
-    />
+      <View style={{ 
+        paddingVertical: 5,
+        backgroundColor: 'white',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 2,
+        marginBottom: 5
+      }}>
+        <Text style={{ fontSize: 24, fontWeight: 'bold', padding: 5, textAlign: 'center' }}>
+          Shopping Cart
+        </Text>
+      </View>
+      <FlatList
+        data={items}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <CartItem
+            id={item.id}
+            imageUrl={item.image}
+            name={item.name}
+            author={item.author || "Unknown Author"}
+            price={item.price}
+            onDelete={handleDelete}
+          />
+        )}
+      />
     </SafeAreaView>
   );
 };
