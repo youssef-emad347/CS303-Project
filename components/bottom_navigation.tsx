@@ -1,8 +1,10 @@
 import {
   FontAwesome,
+  FontAwesome6,
   Fontisto,
   Ionicons,
   MaterialIcons,
+  Entypo,
 } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { disableColor, mainColor } from "@/utils/constants";
@@ -27,10 +29,10 @@ const BottomNavigator = () => {
           tabBarInactiveTintColor: disableColor,
           tabBarActiveTintColor: mainColor,
           tabBarIcon: ({ focused }) => (
-            <Fontisto
+            <Entypo
               color={focused ? mainColor : disableColor}
               name="home"
-              size={20}
+              size={24}
             />
           ),
         }}
@@ -42,10 +44,10 @@ const BottomNavigator = () => {
           tabBarInactiveTintColor: disableColor,
           tabBarActiveTintColor: mainColor,
           tabBarIcon: ({ focused }) => (
-            <MaterialIcons
+            <Entypo
               color={focused ? mainColor : disableColor}
-              name="category"
-              size={20}
+              name="grid"
+              size={28}
             />
           ),
         }}
@@ -57,9 +59,9 @@ const BottomNavigator = () => {
           tabBarInactiveTintColor: disableColor,
           tabBarActiveTintColor: mainColor,
           tabBarIcon: ({ focused }) => (
-            <FontAwesome
+            <FontAwesome6
               color={focused ? mainColor : disableColor}
-              name="shopping-cart"
+              name="cart-shopping"
               size={20}
             />
           ),
@@ -88,9 +90,9 @@ const BottomNavigator = () => {
           tabBarInactiveTintColor: disableColor,
           tabBarActiveTintColor: mainColor,
           tabBarIcon: ({ focused }) => (
-            <Ionicons
+            <FontAwesome
               color={focused ? mainColor : disableColor}
-              name="person"
+              name="user"
               size={20}
             />
           ),
