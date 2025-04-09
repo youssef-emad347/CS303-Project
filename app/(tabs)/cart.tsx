@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FlatList, StyleSheet, View, Text } from "react-native";
-import CartItem from "../components/cartItem";
+import CartItem from "@/components/cartItem";
 
 const App: React.FC = () => {
   const item = [

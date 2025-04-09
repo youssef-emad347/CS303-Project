@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, Image, Pressable, StyleSheet } from "react-native";
-import fallback from "../../assets/FallBack.png";
+import fallback from "@/assets/FallBack.png";
 
 interface AuthorCardProps {
   name: string;

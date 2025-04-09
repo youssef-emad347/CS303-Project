@@ -5,19 +5,20 @@ import {
   MaterialIcons,
 } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { disableColor, mainColor } from "../../utils/constants";
+import { disableColor, mainColor } from "@/utils/constants";
+import Header from "@/components/Header";
 
-import Home from "../(tabs)/home";
-import Categories from "../(tabs)/categories";
-import Cart from "../(tabs)/cart";
-import Profile from "../(tabs)/profile";
-import WishList from "../screens/wishlist";
+import Home from "@/app/(tabs)/index";
+import Categories from "@/app/(tabs)/categories";
+import Cart from "@/app/(tabs)/cart";
+import Profile from "@/app/(tabs)/profile";
+import WishList from "@/app/screens/wishlist";
 
 
 const Tab = createBottomTabNavigator();
 const BottomNavigator = () => {
   return (
-    <Tab.Navigator screenOptions={{headerShown: false}}>
+    <Tab.Navigator screenOptions={{headerShown: true , headerTitle: Header }} >
       <Tab.Screen
         name="Home"
         component={Home}

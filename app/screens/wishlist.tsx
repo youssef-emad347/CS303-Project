@@ -1,12 +1,12 @@
 import { FlatList, View } from "react-native";
 import React, { useState ,useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import WishlistItem from "../components/WishlistItem";
-import { WhishListItem } from "@/utils/types";
+import WishlistItem from "@/components/WishlistItem";
+import { WishItem } from "@/components/WishlistItem";
 
 const WishList: React.FC = () => {
   
-  const [wishList, setWishList] = useState<WhishListItem[]>([
+  const [wishList, setWishList] = useState<WishItem[]>([
     {
       title: "دليل النجاه الفردية",
       name: "دو احمد ابوالوفاه",
@@ -48,13 +48,13 @@ const WishList: React.FC = () => {
     setWishList((prevList) => prevList.filter((_, i) => i !== index));
   }
 
-  const [cart, setCart] = useState<WhishListItem[]>([]); 
+  const [cart, setCart] = useState<WishItem[]>([]); 
 
   useEffect(() => {
     loadCart(); 
   }, []);
 
-  const saveCart = async (cartItems: WhishListItem[]) => {
+  const saveCart = async (cartItems: WishItem[]) => {
     try {
       await AsyncStorage.setItem("cart", JSON.stringify(cartItems));
     } catch (error) {
@@ -73,7 +73,7 @@ const WishList: React.FC = () => {
     }
   };
 
-  const handleAddToCart = (item: WhishListItem) => {
+  const handleAddToCart = (item: WishItem) => {
 
     const itemExists = cart.some(cartItem => cartItem.title === item.title);
     if (!itemExists) { 

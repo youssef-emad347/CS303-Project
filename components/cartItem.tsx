@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, Pressable } from "react-native";
-import del from "../../assets/del.png";
+import del from "@/assets/del.png";
 import { mainColor } from "@/utils/constants";
 
 interface ProductProps {

@@ -1,16 +1,16 @@
 import { Pressable, Text, View, Image, StyleSheet } from "react-native";
 import { mainColor } from "@/utils/constants";
 
-interface WishListItem {
+export interface WishItem {
   title: string;
   name: string;
   details: string;
   image: string;
  
-}
+};
 
 const WishlistItem: React.FC<{
-  item: WishListItem;
+  item: WishItem;
   onRemove: () => void;
   onAddToCart: () => void;
 }> = ({ item, onRemove, onAddToCart }) => {

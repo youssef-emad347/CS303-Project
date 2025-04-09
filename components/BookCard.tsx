@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, Image, Pressable, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
-import fallback from "../../assets/FallBack.png";
+import fallback from "@/assets/FallBack.png";
 import WishlistButton from "./WishlistButton";
 
 interface BookCardProps {
