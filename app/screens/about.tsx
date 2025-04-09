@@ -49,6 +49,7 @@ export default function About() {
           - Eman Osama{"\n"}
           - Roaa Ahmed{"\n"}
           - Noura Mostafa{"\n"}
+          - Mohrail Milad
         </Text>
       </View>
     </ScrollView>
