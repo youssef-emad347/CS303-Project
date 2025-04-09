@@ -14,11 +14,12 @@ import Cart from "@/app/(tabs)/cart";
 import Profile from "@/app/(tabs)/profile";
 import WishList from "@/app/screens/wishlist";
 
-
 const Tab = createBottomTabNavigator();
 const BottomNavigator = () => {
   return (
-    <Tab.Navigator screenOptions={{headerShown: true , headerTitle: Header }} >
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false}}>
       <Tab.Screen
         name="Home"
         component={Home}
@@ -65,8 +66,7 @@ const BottomNavigator = () => {
         }}
       />
 
-
-{/* <Tab.Screen
+      {/* <Tab.Screen
         name="Wishlist"
         component={WishList}
         options={{
