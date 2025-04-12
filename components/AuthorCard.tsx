@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, Image, Pressable, StyleSheet } from "react-native";
 import fallback from "@/assets/FallBack.png";
+import { router } from "expo-router";
 
 interface AuthorCardProps {
   name: string;
@@ -11,7 +12,7 @@ interface AuthorCardProps {
 
 const AuthorCard: React.FC<AuthorCardProps> = ({ name, bio, nationality, image }) => {
   return (
-    <Pressable style={styles.card}>
+    <Pressable style={styles.card} onPress={() => router.push(`/author/${name}`)}>
       <Image source={image ? { uri: image } : fallback} style={styles.image} />
       <Text style={styles.name} numberOfLines={1}>{name}</Text>
       <Text style={styles.nationality}>{nationality}</Text>

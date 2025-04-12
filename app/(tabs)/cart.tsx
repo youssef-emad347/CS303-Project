@@ -1,6 +1,17 @@
 import { useState } from "react";
 import { FlatList, StyleSheet, View, Text } from "react-native";
 import CartItem from "@/components/cartItem";
+import { 
+  getFirestore, 
+  collection, 
+  doc, 
+  setDoc, 
+  addDoc, 
+  getDoc, 
+  getDocs, 
+  updateDoc, 
+  deleteDoc 
+} from "firebase/firestore";
 
 const App: React.FC = () => {
   const item = [

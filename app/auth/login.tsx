@@ -11,7 +11,7 @@ const login = () => {
     const [error, setError] = useState('');
     const router = useRouter();
 
-    const handleLogin = async () => {
+    const handleLogin = async () => { // 
         if (!email || !password) {
             alert('Please fill in all fields');
             return;

@@ -38,19 +38,20 @@ const Books = [
   },
 ];
 
-// interface bookListProps {
-//   searchQuery: string; 
-// }
-export default function BookList() {
+interface bookListProps {
+  searchQuery: string; 
+}
 
-  // const filteredBooks = Books.filter((book) =>
-  //   book.name.toLowerCase().startsWith(searchQuery.toLowerCase()) 
-  // );
+export default function BookList({ searchQuery }: bookListProps) {
+  // الفلترة بناءً على query البحث
+  const filteredBooks = Books.filter((book) =>
+    book.name.toLowerCase().includes(searchQuery.toLowerCase()) 
+  );
 
   return (
     <View style={styles.container}>      
       <FlatList
-        data={Books}
+        data={filteredBooks} 
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <BookCard
@@ -59,27 +60,27 @@ export default function BookList() {
             author={item.author || "Unknown Author"}
             price={item.price}
             image={item.image} 
-         />
-          )}
-       horizontal={true} 
-       showsHorizontalScrollIndicator={false} 
-       contentContainerStyle={{ paddingHorizontal: 16 }} 
-        />
-      
+          />
+        )}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingHorizontal: 16 }} 
+      />
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
     backgroundColor: "#f5f5f5",
-    maxHeight: 300
+    maxHeight: 300,
   },
   heading: {
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 20,
-  }
+  },
 });
