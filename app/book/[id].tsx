@@ -1,8 +1,44 @@
-import { useLocalSearchParams } from "expo-router";
-import BookDetails from "@/components/BookDetails"; 
+import React, { useEffect, useState } from "react"; 
+import { useLocalSearchParams, useNavigation } from "expo-router";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../firebase/firebaseBooks";  
+import { Text } from "react-native";  
+import BookDetails from "@/components/BookDetails";
 
-export default function BookDetailsScreen() {
-  const { id } = useLocalSearchParams(); 
+const BookDetailsPage = () => {
+  const { id } = useLocalSearchParams();  
+  const [book, setBook] = useState<any>(null);
+  const navigation = useNavigation();
 
-  return <BookDetails id={id as string} />;
-}
+  useEffect(() => {
+    const fetchBook = async () => {
+      if (id) {
+        try {
+          const bookRef = doc(db, "books", String(id));  
+          const bookSnap = await getDoc(bookRef);
+          
+          if (bookSnap.exists()) {
+            setBook(bookSnap.data());
+            navigation.setOptions({
+              title: "Book Details", 
+            });  
+          } else {
+            console.log("No such document!");
+          }
+        } catch (error) {
+          console.error("Error fetching book: ", error);
+        }
+      }
+    };
+
+    fetchBook();
+  }, [id]);
+
+  if (!book) {
+    return <Text>Loading...</Text>;  
+  }
+
+  return <BookDetails book={book} />;
+};
+
+export default BookDetailsPage;
