@@ -11,6 +11,11 @@ const BookDetailsPage = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
+
+    navigation.setOptions({
+      title: "Book Details", 
+    });
+    
     const fetchBook = async () => {
       if (id) {
         try {
@@ -19,9 +24,7 @@ const BookDetailsPage = () => {
           
           if (bookSnap.exists()) {
             setBook(bookSnap.data());
-            navigation.setOptions({
-              title: "Book Details", 
-            });  
+          
           } else {
             console.log("No such document!");
           }

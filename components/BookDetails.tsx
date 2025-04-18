@@ -47,8 +47,17 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { padding: 20, backgroundColor: '#FFFFFF', flex: 1 },
-  image: { width: '100%', height: 250, resizeMode: 'contain', marginBottom: 20 },
+  container: { 
+    padding: 20,
+    backgroundColor: '#FFFFFF',
+    flex: 1
+  },
+  image: {
+     width: '100%',
+     height: 250, 
+     resizeMode: 'contain', 
+     marginBottom: 20
+  },
   title: {
     fontSize: 22,
     fontWeight: '700',
@@ -68,12 +77,12 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 15,
     width: '40%',
-    backgroundColor: '#E8F2EF',
+    backgroundColor: '#FFFFFF',
   },
   priceText: {
     textAlign: 'center',
     fontFamily: 'Almarai-Regular',
-    color: '#0D1110',
+    color: '#1B5743',
   },
   section: {
     marginBottom: 15,
@@ -96,7 +105,7 @@ const styles = StyleSheet.create({
   cartButton: {
     backgroundColor: '#1B5743',
     padding: 15,
-    borderRadius: 12,
+    borderRadius: 24,
     marginTop: 30,
   },
   cartText: {
