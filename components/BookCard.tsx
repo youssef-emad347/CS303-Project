@@ -3,26 +3,19 @@ import { Text, Image, Pressable, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import fallback from "@/assets/FallBack.png";
 import WishlistButton from "./WishlistButton";
+import { Book } from "@/utils/types"
 
-interface BookCardProps {
-  id: string;
-  title: string;
-  author: string;
-  price: string;
-  image: string;
-}
-
-const BookCard: React.FC<BookCardProps> = ({
-  id,
-  title,
-  author,
-  price,
-  image,
+const BookCard: React.FC<Book> = ({
+    docID,
+    title,
+    authors,
+    cover,
+    price
 }) => {
   const router = useRouter();
 
   return (
-    <Pressable style={styles.card} onPress={() => router.push(`/book/${id}`)}>
+    <Pressable style={styles.card} onPress={() => router.push(`/book/${docID}`)}>
       <View style={styles.wishlistContainer}>
         <WishlistButton
           onToggle={(isWishlisted) =>
@@ -30,14 +23,14 @@ const BookCard: React.FC<BookCardProps> = ({
           }
         />
       </View>
-      <Image source={image ? { uri: image } : fallback} style={styles.image} />
+      <Image source={cover ? { uri: cover } : fallback} style={styles.image} />
       <Text style={styles.title} numberOfLines={1}>
         {title}
       </Text>
       <Text style={styles.author} numberOfLines={1}>
-        {author}
+        {authors}
       </Text>
-      <Text style={styles.price}>{price}</Text>
+      <Text style={styles.price}>{price} $</Text>
     </Pressable>
   );
 };
@@ -52,10 +45,6 @@ const styles = StyleSheet.create({
     width: 140,
     minHeight: 230,
     alignSelf: "flex-start",
-    shadowColor: "#0D1110",
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 13,
     position: "relative",
   },
   image: {

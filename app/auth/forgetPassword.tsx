@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet, Alert } from 'react-native';
 import { sendPasswordResetEmail } from 'firebase/auth';
-import { auth } from '../../firebase';
+import { auth } from '@/firebase/firebase';
+import { backgroundColor } from '@/utils/constants';
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState('');
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 25,
     justifyContent: 'center',
-    backgroundColor: '#FDF5E6',
+    backgroundColor: backgroundColor,
   },
   header: {
     fontSize: 28,
