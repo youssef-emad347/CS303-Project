@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image , Pressable } from 'react-native';
-import {auth } from '../../firebase';
+import {auth } from '@/firebase/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { router } from 'expo-router';
+import { backgroundColor } from '@/utils/constants';
+import logo from "@/assets/logo.png"
+
 export default function SignUpScreen() {
     
 
@@ -35,7 +38,8 @@ export default function SignUpScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign up</Text>
+      <Image source={logo} style={styles.logo} />
+      <Text style={styles.title}>Sign up a new account</Text>
 
  
       <Text style={styles.label}>User name</Text>
@@ -94,8 +98,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 25,
-    justifyContent: 'center',
-    backgroundColor: '#FDF5E6',
+    // justifyContent: 'center',
+    backgroundColor: backgroundColor,
   },
   title: {
     fontSize: 28,
@@ -145,7 +149,12 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginLeft: 5,
   },
-
+  logo: {
+    width: 100,
+    height: 100,
+    alignSelf:"center",
+    marginTop:30,
+    marginBottom:50,
+  },
 });
-
   

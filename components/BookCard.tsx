@@ -52,10 +52,6 @@ const styles = StyleSheet.create({
     width: 140,
     minHeight: 230,
     alignSelf: "flex-start",
-    shadowColor: "#0D1110",
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 13,
     position: "relative",
   },
   image: {
