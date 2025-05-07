@@ -1,3 +1,4 @@
+import { backgroundColor } from '@/utils/constants';
 import React, { useState } from 'react';
 import { TouchableOpacity, StyleSheet, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -26,7 +27,7 @@ const WishlistButton: React.FC<WishlistButtonProps> = ({ onToggle }) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: 'white',
+    backgroundColor: backgroundColor,
     borderRadius: 20,
     padding: 8,
   },

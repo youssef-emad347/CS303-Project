@@ -1,5 +1,5 @@
 import { Pressable, Text, View, Image, StyleSheet } from "react-native";
-import { mainColor } from "@/utils/constants";
+import { backgroundColor, mainColor } from "@/utils/constants";
 
 export interface WishItem {
   title: string;
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
+    backgroundColor: backgroundColor
   },
   header: {
     fontSize: 18,
@@ -54,15 +55,12 @@ const styles = StyleSheet.create({
   },
   card: {
     flexDirection: "row",
-    backgroundColor: "white",
+    backgroundColor: backgroundColor,
     marginVertical: 5,
     marginHorizontal: 10,
     padding: 10,
+    borderWidth:.3,
     borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
     alignItems: "center",
     height: 160,
   },

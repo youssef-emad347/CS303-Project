@@ -2,7 +2,7 @@ import {Text , View, Image, StyleSheet, Pressable} from "react-native";
 import logo from "@/assets/logo.png";
 import {useRouter} from "expo-router";
 import { FontAwesome6 } from "@expo/vector-icons";
-import { mainColor } from "@/utils/constants";
+import { backgroundColor, mainColor ,borderWidth} from "@/utils/constants";
 
 export default function Header() { 
     const router = useRouter();
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     padding: 12,
-    backgroundColor: "#fff",
+    backgroundColor: backgroundColor,
   },
   logo: {
     width: 50,
@@ -36,15 +36,15 @@ const styles = StyleSheet.create({
     // flex : 1,
     width: "75%",
     alignSelf: "center",
-    borderWidth: 1,
-    borderColor: "#ccc",
-    backgroundColor: "#fff",
+    borderWidth: borderWidth,
+    borderColor: mainColor,
+    backgroundColor: backgroundColor,
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 20,
   },
   WishlistButton: {
-    backgroundColor: "white",
+    backgroundColor: backgroundColor,
     borderRadius: 20,
     padding: 7,
   },

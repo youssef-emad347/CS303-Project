@@ -1,31 +1,31 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
-import { RouteProp } from '@react-navigation/native';
-import { RootStackParamList } from '@/app/(tabs)/index'; 
+import { Author } from "@/utils/types"
+import { backgroundColor } from "@/utils/constants";
 
-type AuthorDetailsRouteProp = RouteProp<{ params: { author: any } }, 'params'>;
+const AuthorDetails: React.FC<Author> = ({ 
+  docID,
+  id ,
+  name,
+  bio,
+  image,
+  books,
+ }) => {
 
-interface AuthorDetailsProps {
-  route: AuthorDetailsRouteProp;
-}
-
-const AuthorDetails: React.FC<AuthorDetailsProps> = ({ route }) => {
-  const { author } = route.params;
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
         <Image 
-          source={{ uri: author.image }} 
+          source={{ uri: image }} 
           style={styles.profileImage} 
         />
-        <Text style={styles.name}>{author.name}</Text>
-        <Text style={styles.nationality}>{author.nationality}</Text>
+        <Text style={styles.name}>{name}</Text>
       </View>
       
       <View style={styles.bioContainer}>
         <Text style={styles.bioTitle}>About</Text>
-        <Text style={styles.bioText}>{author.bio}</Text>
+        <Text style={styles.bioText}>{bio}</Text>
       </View>
     </ScrollView>
   );
@@ -34,7 +34,7 @@ const AuthorDetails: React.FC<AuthorDetailsProps> = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: backgroundColor,
     padding: 20,
   },
   header: {

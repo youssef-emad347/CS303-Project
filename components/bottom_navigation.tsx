@@ -7,7 +7,7 @@ import {
   Entypo,
 } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { disableColor, mainColor } from "@/utils/constants";
+import { backgroundColor, disableColor, mainColor } from "@/utils/constants";
 import Header from "@/components/Header";
 
 import Home from "@/app/(tabs)/index";
@@ -21,7 +21,11 @@ const Tab = createBottomTabNavigator();
 const BottomNavigator = () => {
   return (
     <Tab.Navigator
+      
       screenOptions={{
+        tabBarStyle: {
+          backgroundColor: backgroundColor ,
+          height :60, },
         headerShown: false}}>
       <Tab.Screen
         name="Home"

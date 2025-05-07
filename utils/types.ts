@@ -9,6 +9,7 @@ export interface Book {
     description: string;
   }
 export interface Author {
+    docID: string;
     id : number;
     name: string;
     bio: string;

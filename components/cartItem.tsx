@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, Pressable } from "react-native";
 import del from "@/assets/del.png";
-import { mainColor } from "@/utils/constants";
+import { backgroundColor, borderWidth, mainColor } from "@/utils/constants";
 
 interface ProductProps {
   id: string;
@@ -77,12 +77,9 @@ const styles = StyleSheet.create({
     padding: 10,
     marginVertical: 5,
     marginHorizontal: 10,
-    backgroundColor: "#fff",
+    backgroundColor: backgroundColor,
+    borderWidth: borderWidth,
     borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
   },
   image: {
     width: 100,
@@ -136,7 +133,7 @@ const styles = StyleSheet.create({
     height: 30,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#fff",
+    backgroundColor: backgroundColor,
     borderColor: mainColor,
     borderWidth: 1.5,
     borderRadius: 8,

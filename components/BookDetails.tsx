@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, ScrollView, Text, Image, StyleSheet, Pressable } from 'react-native';
 import { Book } from "@/utils/types"
+import { backgroundColor } from '@/utils/constants';
 
 const BookDetails: React.FC<Book> = ({
   isbn13,
@@ -45,7 +46,7 @@ const BookDetails: React.FC<Book> = ({
 const styles = StyleSheet.create({
   container: { 
     padding: 20,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: backgroundColor,
     flex: 1
   },
   image: {

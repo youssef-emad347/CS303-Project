@@ -4,6 +4,7 @@ import { useRouter } from "expo-router";
 import fallback from "@/assets/FallBack.png";
 import WishlistButton from "./WishlistButton";
 import { Book } from "@/utils/types"
+import { backgroundColor } from "@/utils/constants";
 
 const BookCard: React.FC<Book> = ({
     docID,
@@ -37,9 +38,10 @@ const BookCard: React.FC<Book> = ({
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: backgroundColor,
     padding: 10,
     margin: 10,
+    borderWidth:.3,
     borderRadius: 10,
     alignItems: "center",
     width: 140,

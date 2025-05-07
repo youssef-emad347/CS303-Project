@@ -3,6 +3,7 @@ import React, { useState ,useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import WishlistItem from "@/components/WishlistItem";
 import { WishItem } from "@/components/WishlistItem";
+import { backgroundColor } from "@/utils/constants";
 
 const WishList: React.FC = () => {
   
@@ -84,7 +85,7 @@ const WishList: React.FC = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1 ,backgroundColor: backgroundColor}}>
       <FlatList
         contentContainerStyle={{ flexGrow: 1 }}
         data={wishList}
