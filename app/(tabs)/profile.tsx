@@ -8,6 +8,10 @@ export default function Profile() {
         <Pressable style={styles.button} onPress={() => router.push(`../screens/wishlist`)} >
           <Text style={styles.buttonText}> Go to Wishlist </Text>
         </Pressable>
+        <Pressable style={styles.button} onPress={() => router.push(`/auth/login`)}>
+          <Text style={styles.buttonText}> Go to login </Text>
+        </Pressable>
+
       </View>
     );
   }
