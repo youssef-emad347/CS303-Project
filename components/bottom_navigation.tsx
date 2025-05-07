@@ -15,6 +15,7 @@ import Categories from "@/app/(tabs)/categories";
 import Cart from "@/app/(tabs)/cart";
 import Profile from "@/app/(tabs)/profile";
 import WishList from "@/app/screens/wishlist";
+import Test from "@/app/(tabs)/Test";
 
 const Tab = createBottomTabNavigator();
 const BottomNavigator = () => {
@@ -86,6 +87,21 @@ const BottomNavigator = () => {
       <Tab.Screen
         name="Profile"
         component={Profile}
+        options={{
+          tabBarInactiveTintColor: disableColor,
+          tabBarActiveTintColor: mainColor,
+          tabBarIcon: ({ focused }) => (
+            <FontAwesome
+              color={focused ? mainColor : disableColor}
+              name="user"
+              size={20}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Test"
+        component={Test}
         options={{
           tabBarInactiveTintColor: disableColor,
           tabBarActiveTintColor: mainColor,
