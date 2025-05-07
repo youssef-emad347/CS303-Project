@@ -1,16 +1,9 @@
 import { View, FlatList, StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
-import { db } from "../firebase/firebaseBooks";
+import { db } from "../firebase/firebase";
 import { collection, onSnapshot } from "firebase/firestore";
 import BookCard from "./BookCard";
-
-interface Book {
-  id: string;
-  title: string;
-  author: string;
-  newCopyPrice: string;
-  imageUrl: string;
-}
+import { Book } from "@/utils/types"
 
 export default function BookList() {
   const [books, setBooks] = useState<Book[]>([]);
@@ -20,7 +13,7 @@ export default function BookList() {
 
     const unsubscribe = onSnapshot(booksRef, (snapshot) => {
       const booksData: Book[] = snapshot.docs.map((doc) => ({
-        id: doc.id,
+        docID: doc.id,
         ...doc.data(),
       })) as Book[];
       setBooks(booksData);
@@ -35,16 +28,11 @@ export default function BookList() {
     <View style={styles.container}>
       <FlatList
         data={books}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.docID}
         renderItem={({ item }) => (
           <BookCard
-            id={item.id}
-            title={item.title}
-            author={item.author || "Unknown Author"}
-            price={`${item.newCopyPrice} EGP`}
-
-            image={item.imageUrl}
-          />
+            {...item}
+            />
         )}
         horizontal={true}
         showsHorizontalScrollIndicator={false}

@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, FlatList, StyleSheet, ActivityIndicator, TouchableOpacity, Image } from 'react-native';
-import { db } from '../../components/firebaseConfig';
+import { db2 } from '@/firebase/firebaseConfig';
 import { collection, getDocs } from 'firebase/firestore';
 import Icon from 'react-native-vector-icons/FontAwesome'; 
 
@@ -36,7 +36,7 @@ const Search = () => {
     setLoading(true);
 
     try {
-      const booksRef = collection(db, 'books');
+      const booksRef = collection(db2, 'books');
       const snapshot = await getDocs(booksRef);
 
       const books = snapshot.docs

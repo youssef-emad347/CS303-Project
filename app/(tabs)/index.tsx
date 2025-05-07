@@ -1,6 +1,5 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
 import BookList from "@/components/BookList";
-import About from "../screens/about";
 import AuthorList from "@/components/AuthorList";
 
 export default function Home() {
@@ -8,10 +7,6 @@ export default function Home() {
     <ScrollView>
       <BookList />
       <AuthorList />
-      <View>
-        <Text style={styles.header}> About project</Text>
-        <About />
-      </View>
     </ScrollView>
   );
 }

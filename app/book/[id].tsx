@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"; 
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../firebase/firebaseBooks";  
+import { db } from "@/firebase/firebase";  
 import { Text } from "react-native";  
 import BookDetails from "@/components/BookDetails";
 
@@ -11,7 +11,6 @@ const BookDetailsPage = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-
     navigation.setOptions({
       title: "Book Details", 
     });
@@ -41,7 +40,7 @@ const BookDetailsPage = () => {
     return <Text>Loading...</Text>;  
   }
 
-  return <BookDetails book={book} />;
+  return <BookDetails {...book} />;
 };
 
 export default BookDetailsPage;

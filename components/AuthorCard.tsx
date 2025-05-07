@@ -1,20 +1,14 @@
 import React from "react";
 import { Text, Image, Pressable, StyleSheet } from "react-native";
 import fallback from "@/assets/FallBack.png";
+import { Author } from "@/utils/types";
 
-interface AuthorCardProps {
-  name: string;
-  bio: string;
-  nationality: string;
-  image: string;
-}
 
-const AuthorCard: React.FC<AuthorCardProps> = ({ name, bio, nationality, image }) => {
+const AuthorCard: React.FC<Author> = ({ name, bio, image }) => {
   return (
     <Pressable style={styles.card}>
       <Image source={image ? { uri: image } : fallback} style={styles.image} />
       <Text style={styles.name} numberOfLines={1}>{name}</Text>
-      <Text style={styles.nationality}>{nationality}</Text>
       <Text style={styles.bio} numberOfLines={2}>{bio}</Text>
     </Pressable>
   );
