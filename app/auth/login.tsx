@@ -1,8 +1,10 @@
 import React , { useState } from "react";
 import { useRouter } from "expo-router";
-import { View, Text , StyleSheet  , TextInput , Pressable} from 'react-native'
-import { auth } from '../../firebase';
+import { View, Text , StyleSheet  , TextInput , Pressable ,Image} from 'react-native'
+import { auth } from '@/firebase/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { backgroundColor } from "@/utils/constants";
+import logo from "@/assets/logo.png"
 
 const login = () => {
 
@@ -30,7 +32,8 @@ const login = () => {
 
     return (
     <View style={styles.container} >
-      <Text style={styles.header}>login</Text>
+      <Image source={logo} style={styles.logo} />
+      <Text style={styles.header}>Login to your account</Text>
 
       {/* Email */}
       <Text style={styles.label}>Email</Text>
@@ -56,8 +59,8 @@ const login = () => {
 
       {/* forgot password */}
         <Pressable>
-            <Text style={styles.forgotPassword} onPress={() => {router.push('/auth/forgetPassord') }}>
-            Forgot Password?
+            <Text style={styles.forgotPassword} onPress={() => {router.push('/auth/forgetPassword') }}>
+            Forgot Password ?
             </Text>
         </Pressable>
 
@@ -70,7 +73,7 @@ const login = () => {
 
         {/* Sign up link */}
         <Text style={styles.signupText}>
-            Don't have an account? 
+            Don't have an account ? 
             <Pressable onPress={() => router.push('/auth/signup') }>
                 <Text style={styles.signupLink}> Sign up</Text>
             </Pressable>
@@ -88,8 +91,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 25,
-        justifyContent: 'center',
-        backgroundColor: '#FDF5E6',
+        // justifyContent: 'center',
+        backgroundColor: backgroundColor,
       },
     header: {
         fontSize: 28,
@@ -116,8 +119,9 @@ const styles = StyleSheet.create({
       },
       forgotPassword: {
         alignSelf: 'flex-end',
-        marginTop: 6,
-        marginBottom: 20,
+        marginTop: 8,
+        marginBottom: 10,
+        fontSize: 14,
         color: '#2e4d3f',
         fontWeight: '600',
       },
@@ -137,11 +141,19 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 15,
         color: '#444',
-        marginBottom: 20,
+        marginBottom: 10,
       },
       signupLink: {
         fontSize: 15,
         color: '#2e4d3f',
         fontWeight: '600',
+        top:3.5
+      },
+      logo: {
+        width: 100,
+        height: 100,
+        alignSelf:"center",
+        marginTop:30,
+        marginBottom:50,
       },
 })
