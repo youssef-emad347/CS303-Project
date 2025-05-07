@@ -7,11 +7,18 @@ interface AuthorCardProps {
   bio: string;
   nationality: string;
   image: string;
+  onPress?: () => void;
 }
 
-const AuthorCard: React.FC<AuthorCardProps> = ({ name, bio, nationality, image }) => {
+const AuthorCard: React.FC<AuthorCardProps> = ({
+  name,
+  bio,
+  nationality,
+  image,
+  onPress,
+}) => {
   return (
-    <Pressable style={styles.card}>
+    <Pressable style={styles.card} onPress={onPress}>
       <Image source={image ? { uri: image } : fallback} style={styles.image} />
       <Text style={styles.name} numberOfLines={1}>{name}</Text>
       <Text style={styles.nationality}>{nationality}</Text>
@@ -23,13 +30,17 @@ const AuthorCard: React.FC<AuthorCardProps> = ({ name, bio, nationality, image }
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "#FFFFFF",
-    padding: 20,
+    padding: 10,
     margin: 10,
     borderRadius: 10,
     alignItems: "center",
-    width: 140, 
-    minHeight: 210, 
+    width: 140,
+    minHeight: 230,
     alignSelf: "flex-start",
+    shadowColor: "#0D1110",
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 13,
   },
   image: {
     width: 100,
