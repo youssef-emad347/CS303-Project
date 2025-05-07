@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, FlatList, StyleSheet, ActivityIndicator, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TextInput, FlatList, StyleSheet, ActivityIndicator, Pressable, Image } from 'react-native';
 import { db2 } from '@/firebase/firebaseConfig';
 import { collection, getDocs } from 'firebase/firestore';
 import Icon from 'react-native-vector-icons/FontAwesome'; 
@@ -75,9 +75,9 @@ const Search = () => {
           value={searchQuery}
           onChangeText={setSearchQuery}
         />
-        <TouchableOpacity onPress={() => console.log('Voice search')}>
+        <Pressable onPress={() => console.log('Voice search')}>
           <Icon name="microphone" size={20} color="#275745" style={styles.voiceIcon} />
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       {searchQuery.trim() === '' && recentSearches.length > 0 && (
@@ -89,7 +89,7 @@ const Search = () => {
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
-              <TouchableOpacity
+              <Pressable
                 style={styles.recentItem}
                 onPress={() => {
                   setSearchQuery(item.name);
@@ -103,7 +103,7 @@ const Search = () => {
                 />
                 
                 <Text style={styles.recentText}>{item.name}</Text>
-              </TouchableOpacity>
+              </Pressable>
             )}
           />
         </>
@@ -121,7 +121,7 @@ const Search = () => {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
             <View style={styles.resultItem}>
-              <TouchableOpacity
+              <Pressable
                 onPress={() => {
                   setSearchQuery(item.name);
                   addToRecentSearches(item);
@@ -131,7 +131,7 @@ const Search = () => {
                 {item.author && <Text style={styles.bookAuthor}>by {item.author}</Text>}
                 {item.price && <Text>price: {item.price}</Text>}
                 {item.description && <Text>description: {item.description}</Text>}
-              </TouchableOpacity>
+              </Pressable>
             </View>
           )}
         />

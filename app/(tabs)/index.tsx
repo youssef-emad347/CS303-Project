@@ -1,13 +1,12 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BookList from "@/components/BookList";
 import AuthorList from "@/components/AuthorList";
-import AuthorDetails from "@/components/AuthorDetails";
+import { backgroundColor } from "@/utils/constants";
 
 
-function HomeScreen() {
+export default function HomeScreen() {
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <BookList />
       <AuthorList />
     </ScrollView>
@@ -18,14 +17,13 @@ function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 16,
+    backgroundColor: backgroundColor
   },
   header: {
     fontSize: 18,
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 20,
+    backgroundColor: backgroundColor
   },
 });

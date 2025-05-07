@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FlatList, StyleSheet, View, Text } from "react-native";
 import CartItem from "@/components/cartItem";
+import { backgroundColor } from "@/utils/constants";
 
 const App: React.FC = () => {
   const item = [
@@ -161,18 +162,6 @@ const App: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text
-          style={{
-            fontSize: 24,
-            fontWeight: "bold",
-            padding: 5,
-            textAlign: "center",
-          }}
-        >
-          Shopping Cart
-        </Text>
-      </View>
       <FlatList
         data={items}
         keyExtractor={(item) => item.id}
@@ -199,17 +188,7 @@ const App: React.FC = () => {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
-  },
-
-  header: {
-    paddingVertical: 5,
-    backgroundColor: "white",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-    marginBottom: 5,
+    backgroundColor: backgroundColor
   },
 });
 

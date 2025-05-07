@@ -4,12 +4,13 @@ import {
   View,
   Text,
   Image,
-  TouchableOpacity,
+  Pressable,
   StyleSheet,
   ScrollView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useRouter } from "expo-router";
+import { backgroundColor } from '@/utils/constants';
 
 const ProfileScreen = () => {
   const router = useRouter();
@@ -18,12 +19,12 @@ const ProfileScreen = () => {
       {/* Header with background and notification icon */}
       <View style={styles.header}>
         <Image
-          source={"https://i.pinimg.com/736x/b9/2d/00/b92d0051e38cb3965902f5b609e764b9.jpg"} // Replace with your local background image
+          source={{uri : "https://i.pinimg.com/736x/b9/2d/00/b92d0051e38cb3965902f5b609e764b9.jpg"}} // Replace with your local background image
           style={styles.backgroundImage}
         />
-        <TouchableOpacity style={styles.notificationIcon}>
+        <Pressable style={styles.notificationIcon}>
           <Icon name="notifications-outline" size={24} color="#fff" />
-        </TouchableOpacity>
+        </Pressable>
         <View style={styles.profileContainer}>
           <Image
             source={{ uri: 'https://i.pinimg.com/736x/b9/2d/00/b92d0051e38cb3965902f5b609e764b9.jpg' }} // Replace with actual image URL
@@ -45,7 +46,7 @@ const ProfileScreen = () => {
         <MenuItem icon="language-outline" label="Language" />
         <MenuItem icon="help-circle-outline" label="Help center" />
         <MenuItem icon="shield-checkmark-outline" label="Privacy policy" />
-        <TouchableOpacity
+        <Pressable
           onPress={()=>router.push(`/screens/cardDetails`)}
           style={styles.row}>
           <View style={styles.rowLeft}>
@@ -53,7 +54,7 @@ const ProfileScreen = () => {
             <Text style={[styles.label]}>Credits</Text>
           </View>
           <Icon name="chevron-forward" size={20} color="#ccc" />
-        </TouchableOpacity>
+        </Pressable>
         <MenuItem icon="log-out-outline" label="Log out" color="red" />
       </View>
     </ScrollView>
@@ -62,13 +63,13 @@ const ProfileScreen = () => {
 
 // Reusable component for each row
 const MenuItem = ({ icon, label, color = '#333' ,onPress=()=>{}}) => (
-  <TouchableOpacity onPress={onPress} style={styles.row}>
+  <Pressable onPress={onPress} style={styles.row}>
     <View style={styles.rowLeft}>
       <Icon name={icon} size={20} color={color} />
       <Text style={[styles.label, { color }]}>{label}</Text>
     </View>
     <Icon name="chevron-forward" size={20} color="#ccc" />
-  </TouchableOpacity>
+  </Pressable>
 );
 
 export default ProfileScreen;
@@ -76,7 +77,7 @@ export default ProfileScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F8F8',
+    backgroundColor: backgroundColor,
   },
   header: {
     height: 220,
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   card: {
-    backgroundColor: '#fff',
+    backgroundColor: backgroundColor,
     margin: 10,
     borderRadius: 12,
     padding: 10,

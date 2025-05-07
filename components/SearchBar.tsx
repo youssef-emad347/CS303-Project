@@ -1,3 +1,4 @@
+import { borderWidth, mainColor } from "@/utils/constants";
 import React, {useState } from "react";
 import {View, TextInput, StyleSheet } from "react-native";
 
@@ -31,8 +32,8 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    borderWidth: 1,
-    borderColor: "#ccc",
+    borderWidth: borderWidth,
+    borderColor: mainColor,
     borderRadius: 20,
     paddingHorizontal: 20,
   },

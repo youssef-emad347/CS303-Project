@@ -1,5 +1,6 @@
 const mainColor='#1b5743'
 const disableColor="grey"
-const backgroundColor ='#FDF5E6'
+const backgroundColor ='#FFF'
+const borderWidth = .3
 
-export{mainColor,disableColor,backgroundColor}
+export{mainColor,disableColor,backgroundColor,borderWidth}

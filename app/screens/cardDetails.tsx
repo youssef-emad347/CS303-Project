@@ -1,9 +1,10 @@
+import { backgroundColor } from '@/utils/constants';
 import React, { useState } from 'react';
 import {
   View,
   Text,
   TextInput,
-  TouchableOpacity,
+  Pressable,
   StyleSheet,
   ScrollView,
 } from 'react-native';
@@ -53,13 +54,13 @@ const CardDetailsScreen = () => {
         onChangeText={setCvv}
       />
 
-      <TouchableOpacity style={styles.continueBtn}>
+      <Pressable style={styles.continueBtn}>
         <Text style={styles.continueText}>Continue</Text>
-      </TouchableOpacity>
+      </Pressable>
 
-      <TouchableOpacity style={styles.secondaryBtn}>
+      <Pressable style={styles.secondaryBtn}>
         <Text style={styles.secondaryText}>Continue shopping</Text>
-      </TouchableOpacity>
+      </Pressable>
     </ScrollView>
   );
 };
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: backgroundColor,
   },
   title: {
     fontSize: 20,

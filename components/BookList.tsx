@@ -4,6 +4,7 @@ import { db } from "../firebase/firebase";
 import { collection, onSnapshot } from "firebase/firestore";
 import BookCard from "./BookCard";
 import { Book } from "@/utils/types"
+import { backgroundColor } from "@/utils/constants";
 
 export default function BookList() {
   const [books, setBooks] = useState<Book[]>([]);
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: backgroundColor,
     maxHeight: 300,
   },
   heading: {

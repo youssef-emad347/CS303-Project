@@ -1,8 +1,9 @@
+import { backgroundColor } from "@/utils/constants";
 import { View, Text, ScrollView } from "react-native";
 
 export default function About() {
   return (
-    <ScrollView contentContainerStyle={{ padding: 16 }}>
+    <ScrollView contentContainerStyle={{ padding: 16 ,backgroundColor: backgroundColor }}>
       <View style={{ alignItems: "center", marginBottom: 20 }}>
         <Text style={{ fontSize: 20, fontWeight: "bold" }}>Why BooXtore ?</Text>
         <Text style={{ textAlign: "center", marginTop: 10 }}>

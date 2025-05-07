@@ -2,26 +2,21 @@ import React from "react";
 import { Text, Image, Pressable, StyleSheet } from "react-native";
 import fallback from "@/assets/FallBack.png";
 import { Author } from "@/utils/types";
+import { router } from "expo-router";
+import { backgroundColor } from "@/utils/constants";
 
 
-interface AuthorCardProps {
-  name: string;
-  bio: string;
-  nationality: string;
-  image: string;
-  onPress?: () => void;
-}
-
-const AuthorCard: React.FC<AuthorCardProps> = ({
-  name,
-  bio,
-  nationality,
-  image,
-  onPress,
+const AuthorCard: React.FC<Author> = ({
+    docID,
+    id ,
+    name,
+    bio,
+    image,
+    books,
 }) => {
 
   return (
-    <Pressable style={styles.card} onPress={onPress}>
+    <Pressable style={styles.card} onPress={() => router.push(`/author/${docID}`)}>
       <Image source={image ? { uri: image } : fallback} style={styles.image} />
       <Text style={styles.name} numberOfLines={1}>{name}</Text>
       <Text style={styles.bio} numberOfLines={2}>{bio}</Text>
@@ -31,18 +26,16 @@ const AuthorCard: React.FC<AuthorCardProps> = ({
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: backgroundColor,
     padding: 10,
     margin: 10,
+    borderWidth:.3,
     borderRadius: 10,
     alignItems: "center",
     width: 140,
     minHeight: 230,
     alignSelf: "flex-start",
-    shadowColor: "#0D1110",
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 13,
+    
   },
   image: {
     width: 100,
@@ -55,11 +48,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 5,
   },
-  nationality: {
-    fontSize: 12,
-    color: "#666",
-    textAlign: "center",
-  },
+  // nationality: {
+  //   fontSize: 12,
+  //   color: "#666",
+  //   textAlign: "center",
+  // },
   bio: {
     fontSize: 12,
     color: "#444",
