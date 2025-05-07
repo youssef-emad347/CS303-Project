@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
+//import { NavigationContainer } from "@react-navigation/native";
 import BookList from "@/components/BookList";
 import About from "../screens/about";
 import AuthorList from "@/components/AuthorList";
@@ -25,7 +25,7 @@ function HomeScreen() {
   return (
     <ScrollView>
       <BookList />
-      <AuthorList />  {/* Ensure AuthorList is correctly rendered here */}
+      <AuthorList />  {}
       <View>
         <Text style={styles.header}>About project</Text>
         <About />
@@ -36,7 +36,7 @@ function HomeScreen() {
 
 export default function Home() {
   return (
-    <NavigationContainer>
+   // <NavigationContainer>
       <Stack.Navigator initialRouteName="HomeScreen">
         <Stack.Screen
           name="HomeScreen"
@@ -49,7 +49,7 @@ export default function Home() {
           options={{ title: 'Author Details' }}
         />
       </Stack.Navigator>
-    </NavigationContainer>
+   // </NavigationContainer>
   );
 }
 
