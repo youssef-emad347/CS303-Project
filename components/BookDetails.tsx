@@ -1,48 +1,44 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
+import { View, ScrollView, Text, Image, StyleSheet, Pressable } from 'react-native';
+import { Book } from "@/utils/types"
 
-interface BookDetailsProps {
-  book: {
-    id: string;
-    title: string;
-    imageUrl: string;
-    newCopyPrice: number;
-    usedCopyPrice: number;
-    description: string;
-    aboutAuthor: string;
-  };
-}
-
-const BookDetails: React.FC<BookDetailsProps> = ({ book }) => {
+const BookDetails: React.FC<Book> = ({
+  isbn13,
+  title,
+  authors,
+  cover,
+  price,
+  description
+  }) => {
   return (
-    <View style={styles.container}>
-      <Image source={{ uri: book.imageUrl }} style={styles.image} />
+    <ScrollView style={styles.container}>
+      <Image source={{ uri: cover }} style={styles.image} />
 
-      <Text style={styles.title}>{book.title}</Text>
+      <Text style={styles.title}>{title}</Text>
 
       <View style={styles.priceContainer}>
         <Pressable style={styles.priceButton}>
-          <Text style={styles.priceText}>New{'\n'}{book.newCopyPrice} EGP</Text>
+          <Text style={styles.priceText}>New{'\n'}{price} $</Text>
         </Pressable>
         <Pressable style={styles.priceButton}>
-          <Text style={styles.priceText}>Used{'\n'}{book.usedCopyPrice} EGP</Text>
+          <Text style={styles.priceText}>Used{'\n'}{.75 * price} $</Text>
         </Pressable>
       </View>
 
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Description</Text>
-        <Text style={styles.text}>{book.description}</Text>
+        <Text style={styles.text}>{description || "No description available"}</Text>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>About author</Text>
-        <Text style={styles.text}>{book.aboutAuthor}</Text>
+        <Text style={styles.sectionTitle}>Author</Text>
+        <Text style={styles.text}>{authors}</Text>
       </View>
 
       <Pressable style={styles.cartButton}>
         <Text style={styles.cartText}>Add to cart</Text>
       </Pressable>
-    </View>
+    </ScrollView>
   );
 };
 
