@@ -2,11 +2,14 @@ import { Pressable, Text, View, Image, StyleSheet } from "react-native";
 import { mainColor } from "@/utils/constants";
 
 export interface WishItem {
+  id?: string;
   title: string;
   name: string;
+  docId?: string; 
+  bookId: string;
   details: string;
-  image: string;
- 
+  imageUrl: string;
+  userId?: string;
 };
 
 const WishlistItem: React.FC<{
@@ -17,7 +20,7 @@ const WishlistItem: React.FC<{
   return (
     <View style={styles.card}>
       <View style={styles.imageView}>
-        <Image style={styles.image} source={{ uri: item.image }} />
+        <Image style={styles.image} source={{uri: item.imageUrl }} />
       </View>
       <View style={styles.content}>
         <View style={styles.textView}>

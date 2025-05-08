@@ -33,6 +33,7 @@ button: {
   backgroundColor: "#007BFF",
   paddingVertical: 10,
   paddingHorizontal: 20,
+  marginBottom:10,
   borderRadius: 5,
   alignItems: "center",
 },

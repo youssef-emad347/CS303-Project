@@ -1,25 +1,23 @@
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth} from "firebase/auth";
-
+import { getFirestore } from 'firebase/firestore';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDN1wOwMab4HB4PwdhN9u97f_OSZjLwE_E",
-  authDomain: "booxtore-e5bba.firebaseapp.com",
-  databaseURL: "https://booxtore-e5bba-default-rtdb.firebaseio.com",
-  projectId: "booxtore-e5bba",
-  storageBucket: "booxtore-e5bba.firebasestorage.app",
-  messagingSenderId: "569244843791",
-  appId: "1:569244843791:web:d659883c37cf11dd1b087a",
-  measurementId: "G-0ZF7S3D6E5"
+  apiKey: "AIzaSyAlauWucuX4nV1g4_Me0IJSUFRDnUjIFCM",
+  authDomain: "react-native-dream-69377.firebaseapp.com",
+  projectId: "react-native-dream-69377",
+  storageBucket: "react-native-dream-69377.firebasestorage.app",
+  messagingSenderId: "1044361744327",
+  appId: "1:1044361744327:web:b93bafa94b99243d5653e2"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
-export { app, auth };
+export {app,auth,db};
