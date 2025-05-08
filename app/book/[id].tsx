@@ -40,7 +40,7 @@ const BookDetailsPage = () => {
     return <Text>Loading...</Text>;  
   }
 
-  return <BookDetails {...book} />;
+  return <BookDetails docID={id} {...book} />;
 };
 
 export default BookDetailsPage;

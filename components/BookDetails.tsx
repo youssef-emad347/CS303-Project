@@ -2,8 +2,11 @@ import React from 'react';
 import { View, ScrollView, Text, Image, StyleSheet, Pressable } from 'react-native';
 import { Book } from "@/utils/types"
 import { backgroundColor } from '@/utils/constants';
+import Review from './Reviews';
+import Reviews from './Reviews';
 
 const BookDetails: React.FC<Book> = ({
+  docID,
   isbn13,
   title,
   authors,
@@ -39,6 +42,7 @@ const BookDetails: React.FC<Book> = ({
       <Pressable style={styles.cartButton}>
         <Text style={styles.cartText}>Add to cart</Text>
       </Pressable>
+      <Reviews bookId={docID} />
     </ScrollView>
   );
 };
