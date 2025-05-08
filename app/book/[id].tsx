@@ -9,12 +9,8 @@ const BookDetailsPage = () => {
   const { id } = useLocalSearchParams();  
   const [book, setBook] = useState<any>(null);
   const navigation = useNavigation();
-
+  // console.log(id);
   useEffect(() => {
-    navigation.setOptions({
-      title: "Book Details", 
-    });
-    
     const fetchBook = async () => {
       if (id) {
         try {
@@ -40,7 +36,12 @@ const BookDetailsPage = () => {
     return <Text>Loading...</Text>;  
   }
 
-  return <BookDetails {...book} />;
+  navigation.setOptions({
+    title: "Book Details", 
+  });
+  
+
+  return <BookDetails docID = {id} {...book} />;
 };
 
 export default BookDetailsPage;

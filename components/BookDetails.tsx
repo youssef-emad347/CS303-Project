@@ -2,8 +2,10 @@ import React from 'react';
 import { View, ScrollView, Text, Image, StyleSheet, Pressable } from 'react-native';
 import { Book } from "@/utils/types"
 import { backgroundColor } from '@/utils/constants';
+import Reviews from '@/components/Reviews';
 
 const BookDetails: React.FC<Book> = ({
+  docID,
   isbn13,
   title,
   authors,
@@ -11,6 +13,7 @@ const BookDetails: React.FC<Book> = ({
   price,
   description
   }) => {
+    console.log(docID);
   return (
     <ScrollView style={styles.container}>
       <Image source={{ uri: cover }} style={styles.image} />
@@ -39,6 +42,7 @@ const BookDetails: React.FC<Book> = ({
       <Pressable style={styles.cartButton}>
         <Text style={styles.cartText}>Add to cart</Text>
       </Pressable>
+      <Reviews bookId={docID} />
     </ScrollView>
   );
 };
@@ -102,7 +106,7 @@ const styles = StyleSheet.create({
   cartButton: {
     backgroundColor: '#1B5743',
     padding: 15,
-    borderRadius: 24,
+    borderRadius: 10,
     marginTop: 30,
   },
   cartText: {

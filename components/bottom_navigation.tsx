@@ -8,6 +8,7 @@ import {
 } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { backgroundColor, disableColor, mainColor } from "@/utils/constants";
+import { StyleSheet } from "react-native";
 import Header from "@/components/Header";
 
 import Home from "@/app/(tabs)/index";
@@ -121,4 +122,15 @@ const BottomNavigator = () => {
     </Tab.Navigator>
   );
 };
+
+
+const styles = StyleSheet.create({
+  Tab: {
+    backgroundColor: backgroundColor,
+    marginTop: 0,
+  },
+});
+
+
 export default BottomNavigator;
+
