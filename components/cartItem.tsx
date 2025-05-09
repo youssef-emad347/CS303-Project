@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, Pressable } from "react-native";
 import del from "@/assets/del.png";
 import { backgroundColor, borderWidth, mainColor } from "@/utils/constants";
+import fallback from '@/assets/FallBack.png';
 
 interface ProductProps {
   id: string;
@@ -34,7 +35,7 @@ const CartItem: React.FC<ProductProps> = ({
   // };
   return (
     <View style={styles.card}>
-      <Image source={{ uri: imageUrl }} style={styles.image} />
+      <Image source={ imageUrl ? {uri : imageUrl} : fallback } style={styles.image} />
 
       <View style={styles.innerContainer}>
         <View style={styles.content}>

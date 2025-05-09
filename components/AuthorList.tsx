@@ -6,6 +6,11 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "@/firebase/firebase";
 import { backgroundColor } from "@/utils/constants";
 
+// Function to shuffle the array
+const shuffleArray = (array: any[]) => {
+  return array.sort(() => Math.random() - 0.5);
+};
+
 export default function AuthorList() {
   const [authors, setAuthors] = useState<Author[]>([]);
 
@@ -17,9 +22,12 @@ export default function AuthorList() {
         docID: doc.id,
         ...doc.data(),
       })) as unknown as Author[];
-      setAuthors(authorsData);
+
+      // Shuffle the authors and get only 10 random authors
+      const shuffledAuthors = shuffleArray(authorsData).slice(0, 10);
+      setAuthors(shuffledAuthors);
     }, (error) => {
-      console.error("Error fetching books from Firestore:", error);
+      console.error("Error fetching authors from Firestore:", error);
     });
 
     return () => unsubscribe();
@@ -35,9 +43,9 @@ export default function AuthorList() {
             id={item.id}
             name={item.name}
             bio={item.bio}
-            image={item.image} 
+            image={item.image}
             books={item.books}
-            />
+          />
         )}
         keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={styles.list}
@@ -51,10 +59,10 @@ export default function AuthorList() {
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 10,
-    backgroundColor: backgroundColor
+    backgroundColor: backgroundColor,
   },
   list: {
     paddingHorizontal: 35,
-    backgroundColor: backgroundColor
+    backgroundColor: backgroundColor,
   },
 });

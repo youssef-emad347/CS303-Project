@@ -1,5 +1,5 @@
-import { AntDesign } from '@expo/vector-icons';
-import React from 'react';
+import { AntDesign } from "@expo/vector-icons";
+import React from "react";
 import {
   View,
   Text,
@@ -7,11 +7,17 @@ import {
   Pressable,
   StyleSheet,
   ScrollView,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+} from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
 import { useRouter } from "expo-router";
-import { backgroundColor } from '@/utils/constants';
+import { backgroundColor, mainColor } from "@/utils/constants";
 
+interface MenuItemProps {
+  icon: string;
+  label: string;
+  color?: string;
+  onPress?: () => void;
+}
 const ProfileScreen = () => {
   const router = useRouter();
   return (
@@ -19,15 +25,20 @@ const ProfileScreen = () => {
       {/* Header with background and notification icon */}
       <View style={styles.header}>
         <Image
-          source={{uri : "https://i.pinimg.com/736x/b9/2d/00/b92d0051e38cb3965902f5b609e764b9.jpg"}} // Replace with your local background image
+          source={{
+            uri: "https://i.pinimg.com/736x/b9/2d/00/b92d0051e38cb3965902f5b609e764b9.jpg",
+          }} // Replace with your local background image
           style={styles.backgroundImage}
         />
+        <View style={styles.overlay} />
         <Pressable style={styles.notificationIcon}>
           <Icon name="notifications-outline" size={24} color="#fff" />
         </Pressable>
         <View style={styles.profileContainer}>
           <Image
-            source={{ uri: 'https://i.pinimg.com/736x/b9/2d/00/b92d0051e38cb3965902f5b609e764b9.jpg' }} // Replace with actual image URL
+            source={{
+              uri: "https://i.pinimg.com/736x/b9/2d/00/b92d0051e38cb3965902f5b609e764b9.jpg",
+            }} // Replace with actual image URL
             style={styles.profileImage}
           />
           <Text style={styles.name}>Asmaa Galal</Text>
@@ -42,19 +53,15 @@ const ProfileScreen = () => {
       </View>
 
       <View style={styles.card}>
-        <MenuItem icon="heart-outline" label="Favorite" />
+        <MenuItem
+          icon="heart-outline"
+          label="Favorite"
+          onPress={() => router.push(`/screens/wishlist`)}
+        />
         <MenuItem icon="language-outline" label="Language" />
         <MenuItem icon="help-circle-outline" label="Help center" />
         <MenuItem icon="shield-checkmark-outline" label="Privacy policy" />
-        <Pressable
-          onPress={()=>router.push(`/screens/cardDetails`)}
-          style={styles.row}>
-          <View style={styles.rowLeft}>
-            <AntDesign name={"creditcard"} size={20} color={'#333'} />
-            <Text style={[styles.label]}>Credits</Text>
-          </View>
-          <Icon name="chevron-forward" size={20} color="#ccc" />
-        </Pressable>
+        <MenuItem2 icon="creditcard" label="Credits" onPress={() => router.push(`/screens/cardDetails`)} />
         <MenuItem icon="log-out-outline" label="Log out" color="red" />
       </View>
     </ScrollView>
@@ -62,13 +69,23 @@ const ProfileScreen = () => {
 };
 
 // Reusable component for each row
-const MenuItem = ({ icon, label, color = '#333' ,onPress=()=>{}}) => (
+const MenuItem : React.FC<MenuItemProps> = ({ icon, label, color = "#333", onPress = () => {} }) => (
   <Pressable onPress={onPress} style={styles.row}>
     <View style={styles.rowLeft}>
       <Icon name={icon} size={20} color={color} />
       <Text style={[styles.label, { color }]}>{label}</Text>
     </View>
-    <Icon name="chevron-forward" size={20} color="#ccc" />
+    <Icon name="chevron-forward" size={20} color={mainColor} />
+  </Pressable>
+);
+
+const MenuItem2 : React.FC<MenuItemProps> = ({ icon, label, color = "#333", onPress = () => {} }) => (
+  <Pressable onPress={onPress} style={styles.row}>
+    <View style={styles.rowLeft}>
+      <AntDesign name={icon} size={20} color={color} />
+      <Text style={[styles.label, { color }]}>{label}</Text>
+    </View>
+    <Icon name="chevron-forward" size={20} color={mainColor} />
   </Pressable>
 );
 
@@ -81,21 +98,27 @@ const styles = StyleSheet.create({
   },
   header: {
     height: 220,
-    position: 'relative',
+    position: "relative",
   },
   backgroundImage: {
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+  },
+  overlay: {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   notificationIcon: {
-    position: 'absolute',
+    position: "absolute",
     top: 25,
     right: 20,
     zIndex: 1,
   },
   profileContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 40,
   },
   profileImage: {
@@ -103,17 +126,17 @@ const styles = StyleSheet.create({
     height: 90,
     borderRadius: 45,
     borderWidth: 2,
-    borderColor: '#fff',
+    borderColor: "#fff",
   },
   name: {
     fontSize: 18,
-    fontWeight: 'bold',
-    color: '#fff',
+    fontWeight: "bold",
+    color: "#fff",
     marginTop: 10,
   },
   subtitle: {
     fontSize: 12,
-    color: '#fff',
+    color: "#fff",
     marginTop: 4,
   },
   card: {
@@ -124,14 +147,14 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingVertical: 12,
   },
   rowLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 15,
   },
   label: {

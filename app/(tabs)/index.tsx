@@ -2,11 +2,13 @@ import { Text, View, StyleSheet, ScrollView } from "react-native";
 import BookList from "@/components/BookList";
 import AuthorList from "@/components/AuthorList";
 import { backgroundColor } from "@/utils/constants";
+import HomeBanner from "@/components/HomeBanner";
 
 
 export default function HomeScreen() {
   return (
     <ScrollView style={styles.container}>
+      <HomeBanner />
       <BookList />
       <AuthorList />
     </ScrollView>
