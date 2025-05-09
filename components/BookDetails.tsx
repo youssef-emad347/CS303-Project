@@ -1,9 +1,12 @@
-import React from 'react';
-import { View, ScrollView, Text, Image, StyleSheet, Pressable } from 'react-native';
+import React, { useState } from 'react';
+import { View, ScrollView, Text, Image, StyleSheet, Pressable, Alert, ActivityIndicator } from 'react-native';
 import { Book } from "@/utils/types"
-import { backgroundColor } from '@/utils/constants';
-import Review from './Reviews';
+import { backgroundColor, mainColor } from '@/utils/constants';
 import Reviews from './Reviews';
+import WishlistButton from './WishlistButton';
+import { addToWishlist, removeFromWishlist } from '@/services/wishlistServices';
+import { addToCart } from '@/services/cartServices ';
+import CartButton from './CartButton'
 
 const BookDetails: React.FC<Book> = ({
   docID,
@@ -17,7 +20,13 @@ const BookDetails: React.FC<Book> = ({
   return (
     <ScrollView style={styles.container}>
       <Image source={{ uri: cover }} style={styles.image} />
+      <View style={styles.wishlistContainer}>
+        <WishlistButton
+          onAddToWishlist={() => addToWishlist(docID)}
+          onRemoveFromWishlist={() => removeFromWishlist(docID) }
 
+        />
+      </View>
       <Text style={styles.title}>{title}</Text>
 
       <View style={styles.priceContainer}>
@@ -39,9 +48,7 @@ const BookDetails: React.FC<Book> = ({
         <Text style={styles.text}>{authors}</Text>
       </View>
 
-      <Pressable style={styles.cartButton}>
-        <Text style={styles.cartText}>Add to cart</Text>
-      </Pressable>
+      <CartButton docID={docID} addToCart={addToCart} />
       <Reviews bookId={docID} />
     </ScrollView>
   );
@@ -103,17 +110,12 @@ const styles = StyleSheet.create({
   seeMore: {
     color: '#1B5743',
   },
-  cartButton: {
-    backgroundColor: '#1B5743',
-    padding: 15,
-    borderRadius: 24,
-    marginTop: 30,
-  },
-  cartText: {
-    color: '#FFFFFF',
-    textAlign: 'center',
-    fontFamily: 'Almarai-Bold',
-    fontSize: 16,
+  
+  wishlistContainer: {
+    position: "absolute",
+    zIndex: 1,
+    top: 10,
+    right: 10,
   },
 });
 

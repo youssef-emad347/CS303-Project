@@ -1,45 +1,87 @@
-import { Pressable, Text, View, Image, StyleSheet } from "react-native";
+import { Pressable, Text, View, Image, StyleSheet, ActivityIndicator, Alert } from "react-native";
 import { backgroundColor, mainColor } from "@/utils/constants";
+import { addToCart } from '@/services/cartServices ';
+import { Book } from "@/utils/types";
+import { useState } from "react";
+import { router } from "expo-router";
+import { removeFromWishlist } from "@/services/wishlistServices";
 
-export interface WishItem {
-  id?: string;
-  title: string;
-  name: string;
-  docId?: string; 
-  bookId: string;
-  details: string;
-  imageUrl: string;
-  userId?: string;
-};
+interface ButtonProps {
+  docID?: string;
+  addToCart?: (bookId: string) => Promise<any>;
+  removeFromWishlist?: () => void;
+}
 
-const WishlistItem: React.FC<{
-  item: WishItem;
-  onRemove: () => void;
-  onAddToCart: () => void;
-}> = ({ item, onRemove, onAddToCart }) => {
+function CartButton({ docID, addToCart }: ButtonProps) {
+  const [isAdded, setIsAdded] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleAddToCart = async () => {
+    if (isAdded || loading) return; // prevent duplicate presses
+
+    setLoading(true);
+    try {
+      console.log("Starting to add item to cart...");
+      await addToCart(docID);
+      console.log("Item added to cart successfully");
+      setIsAdded(true);
+    } catch (error) {
+      console.error("Error during addToCart:", error);
+      Alert.alert("Error", "There was an issue adding the item to the cart");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <View style={styles.card}>
+    <Pressable
+      style={[styles.addButton, isAdded && styles.cartButtonAdded]}
+      onPress={handleAddToCart}
+      disabled={loading || isAdded}
+    >
+      {loading ? (
+        <ActivityIndicator size="small" color="white" />
+      ) : (
+        <Text style={styles.cartText}>{isAdded ? "Added" : "Add to cart"}</Text>
+      )}
+    </Pressable>
+  );
+}
+
+function RemoveButton({ removeFromWishlist }: ButtonProps) {
+
+  return (
+    <Pressable
+      style={styles.removeButton}
+      onPress={removeFromWishlist}
+    >
+      <Text style={styles.removeText}>Remove</Text>
+    </Pressable>
+  );
+}
+const WishlistItem: React.FC<{
+  item: Book;
+  handleRemove: () => void;
+}> = ({ item , handleRemove }) => {
+  return (
+    <Pressable style={styles.card} onPress={() => router.push(`/book/${item.docID}`)}>
       <View style={styles.imageView}>
-        <Image style={styles.image} source={{uri: item.imageUrl }} />
+        <Image style={styles.image} source={{uri: item.cover }} />
       </View>
       <View style={styles.content}>
         <View style={styles.textView}>
           <Text style={styles.title}>{item.title}</Text>
-          <Text style={styles.author}>{item.name}</Text>
-          <Text style={styles.details}>{item.details}</Text>
+          <Text style={styles.author}>{item.authors}</Text>
+          <Text style={styles.details}>{item.description || "No description available"}</Text>
         </View>
         <View style={styles.textView}></View>
 
         <View style={styles.buttonContainer}>
-          <Pressable style={styles.addButton} onPress={onAddToCart}>
-            <Text style={styles.addText}>Add to Cart</Text>
-          </Pressable>
-          <Pressable style={styles.removeButton} onPress={onRemove}>
-            <Text style={styles.removeText}>Remove</Text>
-          </Pressable>
+            <CartButton docID={item.docID} addToCart={addToCart} />
+            <RemoveButton removeFromWishlist={handleRemove} />
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
@@ -65,7 +107,7 @@ const styles = StyleSheet.create({
     borderWidth:.3,
     borderRadius: 10,
     alignItems: "center",
-    height: 160,
+    maxHeight: 190,
   },
   image: {
     flexDirection: "row",
@@ -142,6 +184,26 @@ const styles = StyleSheet.create({
     color: mainColor,
     fontSize: 13,
     fontWeight: "semibold",
+  },
+  cartButton: {
+    backgroundColor: mainColor,
+    paddingVertical: 6,
+    paddingHorizontal: 15,
+    borderRadius: 20,
+    alignSelf: "center",
+    marginLeft: 10,
+  },
+  cartText: {
+    color: "#FFFFFF",
+    textAlign: "center",
+    fontSize: 13,
+  },
+  cartButtonAdded: {
+    backgroundColor: mainColor,
+    opacity: 0.5, // green
+  },
+  cartTextAdded: {
+    color: "#fff",
   },
 });
 export default WishlistItem;

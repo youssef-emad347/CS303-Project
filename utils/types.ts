@@ -16,3 +16,8 @@ export interface Author {
     image: string;
     books: string[];
   }
+
+export interface Wishlist{
+    userId: string; 
+    bookId: string[];
+  }

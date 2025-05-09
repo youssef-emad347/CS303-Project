@@ -1,11 +1,17 @@
-import { auth,db } from "../firebase";
-import {  collection,  addDoc, getDocs, deleteDoc, doc, query, where, DocumentData 
+import { auth, db } from "@/firebase/firebase";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc,
+  query,
+  where,
+  DocumentData,
+  setDoc,
+  getDoc,
 } from "firebase/firestore";
-
-
-
-
-
+import { Wishlist } from "@/utils/types";
 
 export const getDocsByField = async (
   collectionName: string,
@@ -21,51 +27,9 @@ export const getDocsByField = async (
   }));
 };
 
-
-export const removeDocById = async (
-  collectionName: string,
-  docId: string
-) => {
+export const removeDocById = async (collectionName: string, docId: string) => {
   const docRef = doc(db, collectionName, docId);
   await deleteDoc(docRef);
-};
-
-
-export const addToWishlist = async (bookData: any) => {
-  try {
-    const userId = auth.currentUser?.uid;
-    if (!userId) {
-      throw new Error("User not authenticated");
-    }
-
-    
-    const wishlistRef = collection(db, "wishlist");
-    const userQuery = query(
-      wishlistRef,
-      where("userId", "==", userId),
-      where("bookId", "==", bookData.bookId)
-    );
-
-    const snapshot = await getDocs(userQuery);
-
-    
-    if (!snapshot.empty) {
-      console.log("🚫 Item already exists in wishlist");
-      return { exists: true };
-    }
-
-    const itemWithUserId = {
-      ...bookData,
-      userId,
-    };
-    
-    const docRef = await addDoc(collection(db, "wishlist"), itemWithUserId);
-    console.log("✅ Item added to wishlist successfully");
-    return { success: true, id: docRef.id };
-  } catch (error) {
-    console.error("Error adding to wishlist:", error);
-    throw error;
-  }
 };
 
 
@@ -78,6 +42,8 @@ export const addToCollection = async (collectionName: string, data: any) => {
     throw error;
   }
 };
+
+
 
 export const getCollectionItems = async (collectionName: string) => {
   try {
@@ -93,6 +59,14 @@ export const getCollectionItems = async (collectionName: string) => {
   }
 };
 
+// onAuthStateChanged(auth, (user) => {
+//   if (user) {
+//     console.log("✅ Auth ready, user is signed in:", user.uid);
+//     // Now safe to call addToWishlist or any function that depends on auth
+//   } else {
+//     console.log("❌ User not signed in");
+//   }
+// });
 
 export const deleteItem = async (collectionName: string, docId: string) => {
   try {
