@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
     width: 140,
-    minHeight: 230,
+    minHeight: 200,
+    maxHeight: 235,
     alignSelf: "flex-start",
     
   },

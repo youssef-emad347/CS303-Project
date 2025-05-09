@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 140,
     minHeight: 230,
+    maxHeight: 235,
     alignSelf: "flex-start",
     position: "relative",
   },

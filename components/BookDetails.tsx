@@ -25,7 +25,7 @@ const BookDetails: React.FC<Book> = ({
           <Text style={styles.priceText}>New{'\n'}{price} $</Text>
         </Pressable>
         <Pressable style={styles.priceButton}>
-          <Text style={styles.priceText}>Used{'\n'}{.75 * price} $</Text>
+          <Text style={styles.priceText}>Used{'\n'}{Math.ceil(.75 * price)} $</Text>
         </Pressable>
       </View>
 
