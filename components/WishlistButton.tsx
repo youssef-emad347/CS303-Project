@@ -2,38 +2,35 @@ import { backgroundColor } from '@/utils/constants';
 import React, { useState } from 'react';
 import { TouchableOpacity, StyleSheet, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { addToWishlist } from '../services/firestoreServices';
-
-
 
 interface WishlistButtonProps {
-  onToggle?: (isWishlisted: boolean) => void;
-  onAddToWishlist: () =>void;
-
+  onAddToWishlist: () => void;  
+  onRemoveFromWishlist: ()=> void;
 }
 
-
-const WishlistButton: React.FC<WishlistButtonProps> = ({ onToggle  , onAddToWishlist}) => {
+export function WishlistButton({ onAddToWishlist , onRemoveFromWishlist }: WishlistButtonProps) {
   const [isWishlisted, setIsWishlisted] = useState(false);
 
   const toggleWishlist = () => {
     const newState = !isWishlisted;
     setIsWishlisted(newState);
-    if (onToggle) {
-      onToggle?.(newState);
-    }
     if (newState) {
-      onAddToWishlist();
+      onAddToWishlist();  
+    }else {
+      onRemoveFromWishlist(); // Remove book from wishlist
     }
   };
 
   return (
-    <Pressable onPress={toggleWishlist}
-    style={styles.button}>
-      <Icon name={isWishlisted ? 'heart' : 'heart-o'} size={18} color={isWishlisted ? 'red' : 'gray'} />
+    <Pressable onPress={toggleWishlist} style={styles.button}>
+      <Icon 
+        name={isWishlisted ? 'heart' : 'heart-o'} 
+        size={18} 
+        color={isWishlisted ? 'red' : 'gray'} 
+      />
     </Pressable>
   );
-};
+}
 
 const styles = StyleSheet.create({
   button: {
