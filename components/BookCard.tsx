@@ -1,28 +1,79 @@
 import React from "react";
 import { Text, Image, Pressable, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
+import { addToCollection } from "@/services/firestoreServices";
+import { auth ,db} from "@/firebase"; 
+import { collection, query, where, getDocs } from "firebase/firestore";
 import fallback from "@/assets/FallBack.png";
 import WishlistButton from "./WishlistButton";
 import { Book } from "@/utils/types"
 import { backgroundColor } from "@/utils/constants";
 
 const BookCard: React.FC<Book> = ({
-    docID,
-    title,
-    authors,
-    cover,
-    price
+  // id,
+  // title,
+  // author,
+  // price,
+  // image,
+  docID,
+  title,
+  authors,
+  cover,
+  price
 }) => {
   const router = useRouter();
+  const handleAddToWishlist =  async() => {
+    const userId = auth.currentUser?.uid;
+    if (!userId) {
+      console.log(" No user logged in");
+      return;
+    }
 
+      const wishlistRef = collection(db, "wishlist");
+      const userQuery = query(
+        wishlistRef,
+        where("userId", "==", userId),
+        where("bookId", "==", id)
+      );
+    
+      try {
+      const snapshot = await getDocs(userQuery);
+      if (!snapshot.empty) {
+        console.log("🚫 Book already in wishlist");
+        return;
+      }
+  
+    addToCollection("wishlist", {
+      id,
+      title,
+      author,
+      price,
+      imageUrl: image,
+      userId,
+    })
+      .then(() => console.log(` ${title} added to wishlist`))
+      .catch((err) => console.error(" Error adding to wishlist:", err));
+    } catch (error) {
+      console.error("❌ Error fetching wishlist:", error);
+    }
+  };
+  
   return (
     <Pressable style={styles.card} onPress={() => router.push(`/book/${docID}`)}>
       <View style={styles.wishlistContainer}>
-        <WishlistButton
-          onToggle={(isWishlisted) =>
-            console.log(`${title} wishlist status:`, isWishlisted)
-          }
-        />
+      <WishlistButton
+  onAddToWishlist={handleAddToWishlist}
+  onToggle={(isWishlisted) =>
+    console.log(`${title} wishlist status:`, isWishlisted)
+  }
+/>
+
+
+
+
+
+
+
       </View>
       <Image source={cover ? { uri: cover } : fallback} style={styles.image} />
       <Text style={styles.title} numberOfLines={1}>
