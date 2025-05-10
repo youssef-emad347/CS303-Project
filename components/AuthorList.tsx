@@ -6,7 +6,6 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "@/firebase/firebase";
 import { backgroundColor } from "@/utils/constants";
 
-// Function to shuffle the array
 const shuffleArray = (array: any[]) => {
   return array.sort(() => Math.random() - 0.5);
 };
@@ -23,7 +22,6 @@ export default function AuthorList() {
         ...doc.data(),
       })) as unknown as Author[];
 
-      // Shuffle the authors and get only 10 random authors
       const shuffledAuthors = shuffleArray(authorsData).slice(0, 10);
       setAuthors(shuffledAuthors);
     }, (error) => {
