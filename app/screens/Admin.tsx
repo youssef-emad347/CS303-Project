@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, FlatList, Alert } from 'react-native';
-import { addBook, getBooks, updateBook, deleteBook } from '@/firebase/bookService'; 
+import { addBook, getBooks, updateBook, deleteBook } from '@/services/bookService'; 
 import { Book } from '@/utils/types';
 import { RelativePathString, useRouter } from 'expo-router';
 

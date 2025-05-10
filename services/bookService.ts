@@ -1,6 +1,7 @@
 import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, setDoc} from "firebase/firestore";
-import { db } from "./firebase";
+import { db } from "../firebase/firebase";
 import { Book } from "@/utils/types";
+import { Alert } from "react-native";
 
 
 export const addBook = async (book: Book): Promise<void> => {
@@ -8,6 +9,7 @@ export const addBook = async (book: Book): Promise<void> => {
     const docRef = await addDoc(collection(db, "books"), book);
     await setDoc(docRef, { ...book, docID: docRef.id }); 
     console.log("Book added with ID: ", docRef.id);
+    Alert.alert("Success", "Book added successfully");
   } catch (e) {
     console.error("Error adding book: ", e);
   }
@@ -45,4 +47,5 @@ export const addBook = async (book: Book): Promise<void> => {
           console.error("Error deleting book: ", e);
         }
       };
+      
       
