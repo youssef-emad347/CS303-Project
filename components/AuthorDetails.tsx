@@ -1,7 +1,60 @@
-import React from "react";
-import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
-import { Author } from "@/utils/types"
+import React, { useEffect, useState } from "react";
+import { View, Text, Image, StyleSheet, ScrollView, FlatList } from "react-native";
+import { Author, Book } from "@/utils/types"
 import { backgroundColor } from "@/utils/constants";
+import BookCard from "./BookCard";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { db } from "@/firebase/firebase";
+
+function BookList({ author }: { author: string }) {
+  const shuffleArray = (array: any[]) => {
+    return array.sort(() => Math.random() - 0.5);
+  };
+  
+  const [books, setBooks] = useState<Book[]>([]);
+
+  useEffect(() => {
+    const booksRef = collection(db, "books");
+    const bookQuery = query(
+      booksRef,
+      where("authors", "array-contains", author)
+    );
+    const unsubscribe = onSnapshot(
+      bookQuery,
+      (snapshot) => {
+        const booksData: Book[] = snapshot.docs.map((doc) => ({
+          docID: doc.id,
+          ...doc.data(),
+        })) as Book[];
+
+        const shuffledBooks = shuffleArray(booksData).slice(0, 10);
+        setBooks(shuffledBooks);
+      },
+      (error) => {
+        console.error("Error fetching books from Firestore:", error);
+      }
+    );
+
+    return () => unsubscribe();
+  }, []);
+
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={books}
+        keyExtractor={(item) => item.docID}
+        renderItem={({ item }) => (
+          <BookCard
+            {...item}
+            />
+        )}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingHorizontal: 16 }}
+      />
+    </View>
+  );
+}
 
 const AuthorDetails: React.FC<Author> = ({ 
   docID,
@@ -26,6 +79,7 @@ const AuthorDetails: React.FC<Author> = ({
       <View style={styles.bioContainer}>
         <Text style={styles.bioTitle}>About</Text>
         <Text style={styles.bioText}>{bio}</Text>
+        <BookList author={name} />
       </View>
     </ScrollView>
   );

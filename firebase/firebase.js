@@ -1,9 +1,11 @@
-// Filename: firebase/firebase.js
-
-import { initializeApp } from 'firebase/app';
-import { initializeAuth, getReactNativePersistence } from 'firebase/auth/react-native';
-import { getFirestore } from 'firebase/firestore';
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
+import { getAnalytics } from "firebase/analytics";
+import { getFirestore } from "firebase/firestore";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 
 // ✅ Firebase config
 const firebaseConfig = {
