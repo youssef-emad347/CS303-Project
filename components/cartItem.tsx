@@ -3,6 +3,7 @@ import { View, Text, Image, StyleSheet, Pressable } from "react-native";
 import del from "@/assets/del.png";
 import { backgroundColor, borderWidth, mainColor } from "@/utils/constants";
 import fallback from '@/assets/FallBack.png';
+import { router } from "expo-router";
 
 interface ProductProps {
   id: string;
@@ -34,8 +35,8 @@ const CartItem: React.FC<ProductProps> = ({
     <View style={styles.card}>
       <Image source={ imageUrl ? {uri : imageUrl} : fallback } style={styles.image} />
 
-      <View style={styles.innerContainer}>
-        <View style={styles.content}>
+      <Pressable style={styles.innerContainer} onPress={() => router.push(`/book/${id}`)}>
+        <View style={styles.content} >
           <Text style={styles.title}>{name}</Text>
           <Text style={styles.author}>{author}</Text>
           <Text style={styles.description}>{description}</Text>
@@ -58,9 +59,10 @@ const CartItem: React.FC<ProductProps> = ({
           </Pressable>
 
         </View>
-        </View>
+        
         
       </View>
+      </Pressable>
       <Pressable style={styles.deleteButton} onPress={() => onDelete(id)}>
             <Image source={del} style={{ width: 20, height: 20 }}></Image>
           </Pressable>

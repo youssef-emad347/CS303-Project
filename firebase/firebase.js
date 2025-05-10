@@ -1,22 +1,21 @@
-// Import the functions you need from the SDKs you need
+
 import { initializeApp } from "firebase/app";
 import { initializeAuth, getReactNativePersistence } from 'firebase/auth/react-native';
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-
-// ✅ Firebase config
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDN1wOwMab4HB4PwdhN9u97f_OSZjLwE_E",
-  authDomain: "booxtore-e5bba.firebaseapp.com",
-  databaseURL: "https://booxtore-e5bba-default-rtdb.firebaseio.com",
-  projectId: "booxtore-e5bba",
-  storageBucket: "booxtore-e5bba.appspot.com", // 🔧 fixed typo: was .firebasestorage.app
-  messagingSenderId: "569244843791",
-  appId: "1:569244843791:web:d659883c37cf11dd1b087a",
-  measurementId: "G-0ZF7S3D6E5"
+  apiKey: "AIzaSyBSiobECIgQtumLU7W53VhrOx9LuUhi1AI",
+  authDomain: "booxtore-final.firebaseapp.com",
+  projectId: "booxtore-final",
+  storageBucket: "booxtore-final.firebasestorage.app",
+  messagingSenderId: "475951267270",
+  appId: "1:475951267270:web:a1f59a9e89188f604f46c7"
 };
 
 // ✅ Initialize Firebase
