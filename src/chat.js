@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { View, Text, TextInput, FlatList, StyleSheet, KeyboardAvoidingView, Platform, ActivityIndicator } from 'react-native';
-import axios from 'axios';
+// import axios from 'axios';
 
 const ChatScreen = () => {
   const [messages, setMessages] = useState([]);

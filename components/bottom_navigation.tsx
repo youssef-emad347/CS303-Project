@@ -15,13 +15,15 @@ import Categories from "@/app/(tabs)/categories";
 import Cart from "@/app/(tabs)/cart";
 import Profile from "@/app/(tabs)/profile";
 import Admin from "@/app/screens/Admin"; // Make sure this import is correct
+import chat from "@/app/screens/chat";
+import { router } from "expo-router";
 
 const Tab = createBottomTabNavigator();
 
 const BottomNavigator = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
@@ -30,6 +32,7 @@ const BottomNavigator = () => {
         setIsAdmin(userDoc.exists() && userDoc.data()?.role === "admin");
       } else {
         setIsAdmin(false);
+        router.push("/auth/login");
       }
       setLoading(false);
     });
