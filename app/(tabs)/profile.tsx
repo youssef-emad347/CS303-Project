@@ -13,6 +13,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { useRouter } from "expo-router";
 import { backgroundColor, mainColor } from "../../utils/constants";
 import { logout } from "@/services/authServices";
+
 interface MenuItemProps {
   icon: string;
   label: string;
@@ -82,11 +83,16 @@ const ProfileScreen = () => {
           label="Favorite"
           onPress={() => router.push(`/screens/wishlist`)}
         />
+        
         <MenuItem icon="language-outline" label="Language" />
         <MenuItem icon="help-circle-outline" label="Help center" />
         <MenuItem icon="shield-checkmark-outline" label="Privacy policy" />
         <MenuItem2 icon="creditcard" label="Credits" onPress={() => router.push(`/screens/cardDetails`)} />
+        <MenuItem icon="chatbubble-outline" label="Chat" onPress={() => router.push(`/screens/chat`)} />
+        <MenuItem icon="camera" label="Camera" onPress={() => router.push(`/screens/camera`)} />
         <MenuItem icon="log-out-outline" label="Log out" color="red" onPress={handleLogout} />
+        
+
       </View>
     </ScrollView>
   );

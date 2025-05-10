@@ -1,7 +1,5 @@
 import { backgroundColor } from '@/utils/constants';
 import React, { useState } from 'react';
-import { router } from 'expo-router';
-
 import {
   View,
   Text,
@@ -12,7 +10,7 @@ import {
 } from 'react-native';
 import { addCredit } from '../../firebase/creditService';
 import { Credit } from '../../utils/models/Credit';
-import { router, useRouter } from 'expo-router';
+import { Stack, router, useRouter } from 'expo-router';
 
 const CardDetailsScreen = () => {
   const router=useRouter();

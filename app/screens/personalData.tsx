@@ -3,7 +3,6 @@ import { View, Text, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import { getAuth } from 'firebase/auth';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
-import { storage } from '../../firebase/firebase';
 import { Stack } from 'expo-router';
 
 export default function DisplayImage() {
@@ -17,6 +16,8 @@ export default function DisplayImage() {
       try {
         const auth = getAuth();
         const user = auth.currentUser;
+        setName(user?.displayName || '');
+        setEmail(user?.email || '');
 
         if (user) {
           const userId = user.uid;

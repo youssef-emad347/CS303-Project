@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Button, Image, Alert, ActivityIndicator, Text } from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
-import axios from 'axios';
+// import axios from 'axios';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase/firebase'; 
 
