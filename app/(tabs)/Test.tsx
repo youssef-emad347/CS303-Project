@@ -1,5 +1,6 @@
 import { Pressable, Text, View ,Image ,StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
+import map from '../../components/map';
 export default function Test() {
   const router = useRouter();
   return (
@@ -10,6 +11,31 @@ export default function Test() {
         </Pressable>
         <Pressable style={styles.button} onPress={() => router.push(`/auth/login`)}>
           <Text style={styles.buttonText}> Go to login </Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={() => router.push(`../screens/camera`)}>
+          <Text style={styles.buttonText}> Go to camira</Text>
+        </Pressable>
+        
+        <Pressable style={styles.button} onPress={() => router.push(`../screens/test`)}>
+          <Text style={styles.buttonText}> Go to camira</Text>
+        </Pressable>
+        
+        <Pressable style={styles.button} onPress={() => router.push(`../screens/test2`)}>
+          <Text style={styles.buttonText}> Go to camira</Text>
+        </Pressable>
+        
+        
+        <Pressable style={styles.button} onPress={() => router.push(`../screens/chat`)}>
+          <Text style={styles.buttonText}> Go to chat</Text>
+        </Pressable>
+        
+        
+        <Pressable style={styles.button} onPress={() => router.push(`../../components/map`)}>
+          <Text style={styles.buttonText}> Go to map</Text>
+        </Pressable>
+        
+        <Pressable style={styles.button} onPress={() => router.push(`../../components/map`)}>
+          <Text style={styles.buttonText}> Go to map</Text>
         </Pressable>
 
       </View>
@@ -40,6 +66,11 @@ buttonText: {
   color: "#FFFFFF",
   fontSize: 16,
   fontWeight: "bold",
+},
+map: {
+  width: '100%',
+  height: '100%',
+  marginTop: 20,
 },
 
 });

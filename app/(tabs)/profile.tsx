@@ -48,7 +48,7 @@ const ProfileScreen = () => {
 
       {/* Menu Cards */}
       <View style={styles.card}>
-        <MenuItem icon="person-outline" label="Personal data" />
+        <MenuItem icon="person-outline" label="Personal data" onPress={() => router.push(`/screens/personalData`)}/>
         <MenuItem icon="clipboard-outline" label="My orders" />
       </View>
 
@@ -62,7 +62,7 @@ const ProfileScreen = () => {
         <MenuItem icon="help-circle-outline" label="Help center" />
         <MenuItem icon="shield-checkmark-outline" label="Privacy policy" />
         <MenuItem2 icon="creditcard" label="Credits" onPress={() => router.push(`/screens/cardDetails`)} />
-        <MenuItem icon="log-out-outline" label="Log out" color="red" />
+        <MenuItem icon="log-out-outline" label="Log out" color="red" onPress={() => router.push('/auth/login')}/>
       </View>
     </ScrollView>
   );
