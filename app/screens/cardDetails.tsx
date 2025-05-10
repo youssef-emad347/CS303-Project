@@ -1,5 +1,7 @@
 import { backgroundColor } from '@/utils/constants';
 import React, { useState } from 'react';
+import { router } from 'expo-router';
+
 import {
   View,
   Text,
@@ -90,9 +92,25 @@ const CardDetailsScreen = () => {
   
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Card details</Text>
+    <View>
+         <Stack.Screen 
+        options={{ 
+          title: 'Card Details', // تغيير العنوان للعربية
+          headerStyle: {
+            backgroundColor: '#214E34', // لون أخضر داكن
+            elevation: 0, // إزالة الظل في الأندرويد
+          },
+          headerTintColor: 'white', // لون النص أبيض
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            fontSize: 18,
+          },
+          headerBackVisible: true, // إخفاء زر الرجوع
+          headerTitleAlign: 'center', // توسيط العنوان
+        }} 
+      />
 
+     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.label}>Card name</Text>
       <Text style={styles.error}>{cardNameErr}</Text>
       <TextInput
@@ -145,11 +163,15 @@ const CardDetailsScreen = () => {
         
       </Pressable>
 
-      <Pressable style={styles.secondaryBtn}>
+      <Pressable style={styles.secondaryBtn} onPress={() => router.push('/(tabs)/cart')}>
         <Text style={styles.secondaryText}>Continue shopping</Text>
       </Pressable>
     </ScrollView>
-  );
+  
+    {/* باقي محتوى الشاشة */}
+  </View>
+
+   );
 };
 
 export default CardDetailsScreen;

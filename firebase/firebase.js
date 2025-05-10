@@ -1,14 +1,10 @@
 
 import { initializeApp } from "firebase/app";
 import { initializeAuth, getReactNativePersistence } from 'firebase/auth/react-native';
-import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
+// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyBSiobECIgQtumLU7W53VhrOx9LuUhi1AI",
   authDomain: "booxtore-final.firebaseapp.com",

@@ -72,7 +72,7 @@ const ProfileScreen = () => {
 
       {/* Menu Cards */}
       <View style={styles.card}>
-        <MenuItem icon="person-outline" label="Personal data" />
+        <MenuItem icon="person-outline" label="Personal data" onPress={() => router.push(`/screens/personalData`)}/>
         <MenuItem icon="clipboard-outline" label="My orders" />
       </View>
 
