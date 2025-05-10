@@ -3,16 +3,14 @@ import { useEffect, useState } from "react";
 import { db } from "../firebase/firebase";
 import { collection, onSnapshot } from "firebase/firestore";
 import BookCard from "./BookCard";
-import { Book } from "@/utils/types";
+import { Book } from "@/utils/types"
 import { backgroundColor } from "@/utils/constants";
-
-// Function to shuffle the array
-const shuffleArray = (array: any[]) => {
-  return array.sort(() => Math.random() - 0.5);
-};
 
 export default function BookList() {
   const [books, setBooks] = useState<Book[]>([]);
+  const shuffleArray = (array: any[]) => {
+    return array.sort(() => Math.random() - 0.5);
+  };
 
   useEffect(() => {
     const booksRef = collection(db, "books");
@@ -22,9 +20,10 @@ export default function BookList() {
         docID: doc.id,
         ...doc.data(),
       })) as Book[];
-
+      
       const shuffledBooks = shuffleArray(booksData).slice(0, 10);
       setBooks(shuffledBooks);
+
     }, (error) => {
       console.error("Error fetching books from Firestore:", error);
     });
@@ -38,7 +37,9 @@ export default function BookList() {
         data={books}
         keyExtractor={(item) => item.docID}
         renderItem={({ item }) => (
-          <BookCard {...item} />
+          <BookCard
+            {...item}
+            />
         )}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
@@ -60,5 +61,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 20,
-  },
+  }
 });

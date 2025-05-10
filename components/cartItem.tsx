@@ -11,7 +11,10 @@ interface ProductProps {
   description: string;
   price: string;
   imageUrl: string;
+  quantity: number;
   onDelete: (id: string) => void;
+  onIncrement: (id: string) => void;
+  onDecrement: (id: string) => void;
 }
 
 const CartItem: React.FC<ProductProps> = ({
@@ -21,18 +24,12 @@ const CartItem: React.FC<ProductProps> = ({
   price,
   description,
   imageUrl,
+  quantity,
   onDelete,
+  onIncrement,
+  onDecrement
 }) => {
-  const [quantity, setQuantity] = useState(1);
-  // const handleDelete = () => {
-  //   Alert.alert("Delete Item", "Are you sure you want to delete this item?", [
-  //     {
-  //       text: "Cancel",
-  //       style: "cancel",
-  //     },
-  //     { text: "OK", onPress: () => onDelete(id) },
-  //   ]);
-  // };
+  
   return (
     <View style={styles.card}>
       <Image source={ imageUrl ? {uri : imageUrl} : fallback } style={styles.image} />
@@ -46,7 +43,7 @@ const CartItem: React.FC<ProductProps> = ({
           <View style={styles.buttonContainer}>
           <Pressable
             style={styles.button}
-            onPress={() => setQuantity((q) => Math.max(1, q - 1))}
+            onPress={() => onDecrement}
           >
             <Text style={styles.buttonText}>-</Text>
           </Pressable>
@@ -55,7 +52,7 @@ const CartItem: React.FC<ProductProps> = ({
 
           <Pressable
             style={styles.button}
-            onPress={() => setQuantity((q) => q + 1)}
+            onPress={() => onIncrement}
           >
             <Text style={styles.buttonText}>+</Text>
           </Pressable>

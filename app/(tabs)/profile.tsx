@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useRouter } from "expo-router";
-import { backgroundColor, mainColor } from "@/utils/constants";
+import { backgroundColor, mainColor } from "../../utils/constants";
 
 interface MenuItemProps {
   icon: string;

@@ -5,7 +5,7 @@ import { backgroundColor, mainColor } from '@/utils/constants';
 import Reviews from './Reviews';
 import WishlistButton from './WishlistButton';
 import { addToWishlist, removeFromWishlist } from '@/services/wishlistServices';
-import { addToCart } from '@/services/cartServices ';
+import { addToCart } from '@/services/cartServices';
 import CartButton from './CartButton'
 
 const BookDetails: React.FC<Book> = ({
