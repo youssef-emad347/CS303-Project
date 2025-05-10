@@ -1,10 +1,13 @@
+
 import React , { useState } from "react";
 import { useRouter } from "expo-router";
 import { View, Text , StyleSheet  , TextInput , Pressable ,Image} from 'react-native'
-import { auth } from '@/firebase/firebase';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth ,db } from '@/firebase/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { backgroundColor } from "@/utils/constants";
-import logo from "@/assets/logo.png"
+import logo from "@/assets/logo.png";
+
 
 const login = () => {
 
@@ -18,11 +21,36 @@ const login = () => {
             alert('Please fill in all fields');
             return;
         }
+
+
         try {
-          await signInWithEmailAndPassword(auth, email, password);
+          const userCredential = await signInWithEmailAndPassword(auth, email, password);
+          const user = userCredential.user;
+
+          // const userDocRef = doc(db, 'users', user.uid); 
+          
+          // const userDoc = await getDoc(userDocRef);
+
+          const userSnapshot = await getDoc(doc(db, 'users', user.uid));
+          const role = userSnapshot.exists() ? userSnapshot.data().role : null;
+
+          // const role = userDoc.exists() ? userDoc.data().role : null;
+          
+
           console.log('Login successful');
           setError('');
-          router.push('/(tabs)/cart');
+
+
+
+          if (role === 'admin') {
+            router.push("/screens/Admin"); 
+          } else if (role === 'user') {
+            router.push('/(tabs)/cart'); 
+          }
+          else {
+            alert('Your role is not assigned. Please contact support.');
+          }
+          
         } catch (err) {
           console.error('Login error:', err);
           setError('Invalid email or password');

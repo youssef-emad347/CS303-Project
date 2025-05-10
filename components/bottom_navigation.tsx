@@ -73,21 +73,6 @@ const BottomNavigator = () => {
         }}
       />
 
-      {/* <Tab.Screen
-        name="Wishlist"
-        component={WishList}
-        options={{
-          tabBarInactiveTintColor: disableColor,
-          tabBarActiveTintColor: mainColor,
-          tabBarIcon: ({ focused }) => (
-            <Ionicons
-              color={focused ? mainColor : disableColor}
-              name="heart"
-              size={20}
-            />
-          ),
-        }}
-      /> */}
       <Tab.Screen
         name="Profile"
         component={Profile}

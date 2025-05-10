@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image , Pressable } from 'react-native';
 import {auth } from '@/firebase/firebase';
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from '@/firebase/firebase'; 
+import { Timestamp } from 'firebase/firestore';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { router } from 'expo-router';
 import { backgroundColor } from '@/utils/constants';
@@ -26,6 +29,15 @@ export default function SignUpScreen() {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
+
+      await setDoc(doc(db, 'users', user.uid), {
+        
+        email: email,
+        username: username,
+        role: 'user',
+        createdAt: Timestamp.now(),
+      });
+
       console.log('Registered user:', user);
       alert('Account created successfully ✅');
       router.push('./login');

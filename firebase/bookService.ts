@@ -1,23 +1,17 @@
-import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc} from "firebase/firestore";
+import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, setDoc} from "firebase/firestore";
 import { db } from "./firebase";
+import { Book } from "@/utils/types";
 
-interface Book {
-    id: string;
-    title: string;
-    author: string;
-    price: number;
-    description: string;
-}
 
 export const addBook = async (book: Book): Promise<void> => {
-    try {
-      const docRef = await addDoc(collection(db, "books"), book);
-      console.log("Book added with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding book: ", e);
-    }
-  };
-  
+  try {
+    const docRef = await addDoc(collection(db, "books"), book);
+    await setDoc(docRef, { ...book, docID: docRef.id }); 
+    console.log("Book added with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding book: ", e);
+  }
+};
     export const getBooks = async (): Promise<Book[]> => {
         try {
           const querySnapshot = await getDocs(collection(db, "books"));

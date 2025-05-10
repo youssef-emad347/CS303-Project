@@ -2,9 +2,9 @@ export interface Book {
     docID: string;
     isbn13: string;
     title: string;
-    authors: string[];
+    authors?: string[];
     cover: string;
-    categories: string[];
+    categories?: string[];
     price: number;
     description: string;
   }
@@ -21,3 +21,4 @@ export interface Wishlist{
     userId: string; 
     bookId: string[];
   }
+  
