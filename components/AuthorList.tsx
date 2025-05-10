@@ -23,8 +23,7 @@ export default function AuthorList() {
         ...doc.data(),
       })) as unknown as Author[];
 
-      // Shuffle the authors and get only 10 random authors
-      const shuffledAuthors = shuffleArray(authorsData).slice(0, 10);
+      const shuffledAuthors = shuffleArray(authorsData);
       setAuthors(shuffledAuthors);
     }, (error) => {
       console.error("Error fetching authors from Firestore:", error);
@@ -47,7 +46,7 @@ export default function AuthorList() {
             books={item.books}
           />
         )}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.docID.toString()}
         contentContainerStyle={styles.list}
         horizontal={true}
         showsHorizontalScrollIndicator={false}

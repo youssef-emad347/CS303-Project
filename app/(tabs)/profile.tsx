@@ -7,11 +7,12 @@ import {
   Pressable,
   StyleSheet,
   ScrollView,
+  Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useRouter } from "expo-router";
 import { backgroundColor, mainColor } from "../../utils/constants";
-
+import { logout } from "@/services/authServices";
 interface MenuItemProps {
   icon: string;
   label: string;
@@ -20,6 +21,29 @@ interface MenuItemProps {
 }
 const ProfileScreen = () => {
   const router = useRouter();
+
+  const handleLogout = async () => {
+    Alert.alert(
+      "Logout",
+      "Are you sure you want to logout?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel"
+        },
+        { 
+          text: "Logout", 
+          onPress: async () => {
+            const success = await logout();
+            if (success) {
+              router.replace("/auth/login");
+            }
+          }
+        }
+      ]
+    );
+  };
+  
   return (
     <ScrollView style={styles.container}>
       {/* Header with background and notification icon */}
@@ -48,7 +72,7 @@ const ProfileScreen = () => {
 
       {/* Menu Cards */}
       <View style={styles.card}>
-        <MenuItem icon="person-outline" label="Personal data" />
+        <MenuItem icon="person-outline" label="Personal data" onPress={() => router.push(`/screens/personalData`)}/>
         <MenuItem icon="clipboard-outline" label="My orders" />
       </View>
 
@@ -62,7 +86,7 @@ const ProfileScreen = () => {
         <MenuItem icon="help-circle-outline" label="Help center" />
         <MenuItem icon="shield-checkmark-outline" label="Privacy policy" />
         <MenuItem2 icon="creditcard" label="Credits" onPress={() => router.push(`/screens/cardDetails`)} />
-        <MenuItem icon="log-out-outline" label="Log out" color="red" />
+        <MenuItem icon="log-out-outline" label="Log out" color="red" onPress={handleLogout} />
       </View>
     </ScrollView>
   );

@@ -18,7 +18,6 @@ const BookCard: React.FC<Book> = ({
   price,
 }) => {
   const router = useRouter();
-  
   return (
     <Pressable
       style={styles.card}

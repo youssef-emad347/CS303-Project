@@ -1,32 +1,56 @@
 import {
   FontAwesome,
   FontAwesome6,
-  Fontisto,
-  Ionicons,
-  MaterialIcons,
   Entypo,
 } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { backgroundColor, disableColor, mainColor } from "@/utils/constants";
-import Header from "@/components/Header";
+import { auth, db } from "@/firebase/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
 
-import Home from "@/app/(tabs)/index";
+import Home from "@/app/(tabs)/home";
 import Categories from "@/app/(tabs)/categories";
 import Cart from "@/app/(tabs)/cart";
 import Profile from "@/app/(tabs)/profile";
-import WishList from "@/app/screens/wishlist";
-import Test from "@/app/(tabs)/Test";
+import Admin from "@/app/screens/Admin"; // Make sure this import is correct
 
 const Tab = createBottomTabNavigator();
+
 const BottomNavigator = () => {
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        // Check if user is admin
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        setIsAdmin(userDoc.exists() && userDoc.data()?.role === "admin");
+      } else {
+        setIsAdmin(false);
+      }
+      setLoading(false);
+    });
+
+    return unsubscribe;
+  }, []);
+
+  if (loading) {
+    return null; // Or return a loading spinner
+  }
+
   return (
     <Tab.Navigator
-      
       screenOptions={{
         tabBarStyle: {
-          backgroundColor: backgroundColor ,
-          height :60, },
-        headerShown: false}}>
+          backgroundColor: backgroundColor,
+          height: 60,
+        },
+        headerShown: false
+      }}
+    >
       <Tab.Screen
         name="Home"
         component={Home}
@@ -72,22 +96,6 @@ const BottomNavigator = () => {
           ),
         }}
       />
-
-      {/* <Tab.Screen
-        name="Wishlist"
-        component={WishList}
-        options={{
-          tabBarInactiveTintColor: disableColor,
-          tabBarActiveTintColor: mainColor,
-          tabBarIcon: ({ focused }) => (
-            <Ionicons
-              color={focused ? mainColor : disableColor}
-              name="heart"
-              size={20}
-            />
-          ),
-        }}
-      /> */}
       <Tab.Screen
         name="Profile"
         component={Profile}
@@ -103,22 +111,25 @@ const BottomNavigator = () => {
           ),
         }}
       />
-      <Tab.Screen
-        name="Test"
-        component={Test}
-        options={{
-          tabBarInactiveTintColor: disableColor,
-          tabBarActiveTintColor: mainColor,
-          tabBarIcon: ({ focused }) => (
-            <FontAwesome
-              color={focused ? mainColor : disableColor}
-              name="user"
-              size={20}
-            />
-          ),
-        }}
-      />
+      {isAdmin && (
+        <Tab.Screen
+          name="Admin"
+          component={Admin}
+          options={{
+            tabBarInactiveTintColor: disableColor,
+            tabBarActiveTintColor: mainColor,
+            tabBarIcon: ({ focused }) => (
+              <FontAwesome
+                color={focused ? mainColor : disableColor}
+                name="user"
+                size={20}
+              />
+            ),
+          }}
+        />
+      )}
     </Tab.Navigator>
   );
 };
+
 export default BottomNavigator;
