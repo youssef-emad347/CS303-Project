@@ -21,3 +21,12 @@ export interface Wishlist{
     userId: string; 
     bookId: string[];
   }
+
+export interface Cart{
+  userId: string; 
+  books: {
+    bookId: string;
+    quantity: number;
+  }[];
+  
+}

@@ -1,6 +1,6 @@
 import { Pressable, Text, View, Image, StyleSheet, ActivityIndicator, Alert } from "react-native";
 import { backgroundColor, mainColor } from "@/utils/constants";
-import { addToCart } from '@/services/cartServices ';
+import { addToCart } from '@/services/cartServices';
 import { Book } from "@/utils/types";
 import { useState } from "react";
 import { router } from "expo-router";
