@@ -16,27 +16,21 @@ import { Book } from "@/utils/types";
 import fallback from "@/assets/FallBack.png";
 import { router } from "expo-router";
 import { backgroundColor,borderWidth,mainColor } from "@/utils/constants"
+import { View, Text, TextInput, FlatList, StyleSheet, ActivityIndicator, Pressable, Image } from 'react-native';
+import { db } from '@/firebase/firebase';
+import { collection, getDocs } from 'firebase/firestore';
+import Icon from 'react-native-vector-icons/FontAwesome'; 
 
-const SearchItem: React.FC<Book> = (
-  { docID, title, authors, cover },
-  onPress: () => void
-) => {
-  return (
-    <View style={styles.card}>
-      <Image source={cover ? { uri: cover } : fallback} style={styles.image} />
+type Book = {
+  title: string;
+  authors?: string;
+  price?: string;
+  description?: string;
+  cover?: string;
+  isbn13?: string;
+  categories?: string | string[];
+  publishDate?: string;
 
-      <Pressable
-        style={styles.innerContainer}
-        onPress={() => router.push(`/book/${docID}`)}
-      >
-        <View style={styles.content}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.author}>{authors}</Text>
-          <View style={styles.buttonContainer}></View>
-        </View>
-      </Pressable>
-    </View>
-  );
 };
 
 const Search = () => {
@@ -44,13 +38,62 @@ const Search = () => {
   const [results, setResults] = useState<Book[]>([]);
   const [loading, setLoading] = useState(false);
   const [recentSearches, setRecentSearches] = useState<Book[]>([]);
+  const [suggestedBooks, setSuggestedBooks] = useState<Book[]>([]);
+  const [allBooks, setAllBooks] = useState<Book[]>([]);
+  const [lastClickedBook, setLastClickedBook] = useState<Book | null>(null);
+
+ 
+  useEffect(() => {
+    const fetchAllBooks = async () => {
+      const booksRef = collection(db, 'books');
+      const snapshot = await getDocs(booksRef);
+      const books = snapshot.docs.map(doc => doc.data() as Book);
+      setAllBooks(books);
+    };
+
+    fetchAllBooks();
+  }, []);
+
+  useEffect(() => {
+    if (lastClickedBook) {
+      updateSuggestedBooks(lastClickedBook);
+    }
+  }, [lastClickedBook, allBooks]);
+
+  const updateSuggestedBooks = (book: Book) => {
+    if (!book.categories || (Array.isArray(book.categories) && book.categories.length === 0)) {
+      setSuggestedBooks([]);
+      return;
+    }
+
+    const bookCategories = Array.isArray(book.categories) 
+      ? book.categories 
+      : book.categories.split(',').map(c => c.trim());
+
+    const bySameCategory = allBooks.filter(b => {
+      if (!b.categories) return false;
+      
+      const bCategories = Array.isArray(b.categories)
+        ? b.categories
+        : b.categories.split(',').map(c => c.trim());
+      
+      return (
+        bCategories.some(category => bookCategories.includes(category)) && 
+        b.title !== book.title
+      );
+    });
+
+    setSuggestedBooks(bySameCategory.slice(0, 5));
+  };
 
   const addToRecentSearches = (book: Book) => {
     setRecentSearches((prev) => {
       const isDuplicate = prev.some((b) => b.title === book.title);
       if (isDuplicate) return prev;
-      return [book, ...prev].slice(0, 10);
+      const newRecent = [book, ...prev].slice(0, 10);
+      return newRecent;
     });
+    setLastClickedBook(book);
   };
 
   const searchForBooks = async () => {
@@ -62,7 +105,8 @@ const Search = () => {
     setLoading(true);
 
     try {
-      const booksRef = collection(db, "books");
+      const booksRef = collection(db, 'books');
+
       const snapshot = await getDocs(booksRef);
 
       const books = snapshot.docs
@@ -90,14 +134,8 @@ const Search = () => {
   return (
     <View style={styles.container}>
       <View style={styles.searchContainer}>
-        {/* <Icon name="search" size={16} color="#275745" style={styles.searchIcon} /> */}
-        {searchQuery.trim() === "" && (
-          <Icon
-            name="search"
-            size={20}
-            color="#275745"
-            style={styles.searchIcon}
-          />
+        {searchQuery.trim() === '' && (
+          <Icon name="search" size={20} color="#275745" style={styles.searchIcon} />
         )}
 
         <TextInput
@@ -116,33 +154,62 @@ const Search = () => {
         </Pressable>
       </View>
 
-      {searchQuery.trim() === "" && recentSearches.length > 0 && (
+      {searchQuery.trim() === '' && (
         <>
-          <Text style={styles.recentTitle}>Recent searches</Text>
-          <FlatList
-            data={recentSearches}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <Pressable
-                style={styles.recentItem}
-                onPress={() => {
-                  setSearchQuery(item.name);
-                  addToRecentSearches(item);
-                }}
-              >
-                <Image
-                  source={{
-                    uri: item.image || "https://via.placeholder.com/100",
-                  }} //لسهه
-                  style={styles.recentImage}
-                />
+          {recentSearches.length > 0 && (
+            <>
+              <Text style={styles.recentTitle}>Recent searches</Text>
+              <FlatList
+                data={recentSearches}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item }) => (
+                  <Pressable
+                    style={styles.recentItem}
+                    onPress={() => {
+                      setSearchQuery(item.title);
+                      addToRecentSearches(item);
+                    }}
+                  >
+                    <Image
+                      source={{ uri: item.cover || 'https://via.placeholder.com/100' }}
+                      style={styles.recentImage}
+                    />
+                    <Text style={styles.recentText}>{item.title}</Text>
+                  </Pressable>
+                )}
+              />
+            </>
+          )}
 
-                <Text style={styles.recentText}>{item.name}</Text>
-              </Pressable>
-            )}
-          />
+          {lastClickedBook && recentSearches.length > 0 && suggestedBooks.length > 0 && (
+            <>
+              <Text style={styles.recentTitle}>Suggested books</Text>
+              <FlatList
+                data={suggestedBooks}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item }) => (
+                  <Pressable
+                    style={styles.recentItem}
+                    onPress={() => {
+                      setSearchQuery(item.title);
+                      addToRecentSearches(item);
+                    }}
+                  >
+                    <Image
+                      source={{ uri: item.cover || 'https://via.placeholder.com/100' }}
+                      style={styles.recentImage}
+                    />
+                    <Text style={styles.recentText}>{item.title}</Text>
+                  </Pressable>
+                )}
+              />
+            </>
+          )}
+
         </>
       )}
 
@@ -164,9 +231,16 @@ const Search = () => {
                 authors={item.authors}
                 cover={item.cover}
                 onPress={() => {
-                  setSearchQuery(item.name), addToRecentSearches(item);
+                  setSearchQuery(item.title);
+                  addToRecentSearches(item);
                 }}
-              />
+              >
+                <Text style={styles.bookTitle}>{item.title}</Text>
+                {item.authors && <Text style={styles.bookAuthor}>by {item.authors}</Text>}
+                {item.price && <Text>price: {item.price}</Text>}
+                {item.description && <Text>description: {item.description}</Text>}
+              </Pressable>
+
             </View>
           )}
         />
@@ -176,7 +250,7 @@ const Search = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: "#fff" },
+  container: { flex: 1, padding: 16, backgroundColor: '#fff' },
 
   searchContainer: {
     flexDirection: "row",
@@ -199,25 +273,16 @@ const styles = StyleSheet.create({
   voiceIcon: {
     marginLeft: 8,
   },
-
   resultItem: {
     padding: 12,
     borderBottomColor: "#eee",
     borderBottomWidth: 1,
   },
-
   bookTitle: { fontSize: 18 },
-  bookAuthor: { fontSize: 14, color: "#666" },
-  noResults: { textAlign: "center", marginTop: 18, color: "#999" },
-
-  recentTitle: {
-    fontSize: 13,
-    padding: 12,
-    fontWeight: "600",
-    marginTop: 20,
-    color: "#275745",
-  },
-  recentItem: { alignItems: "center", marginRight: 12, marginTop: 12 },
+  bookAuthor: { fontSize: 14, color: '#666' },
+  noResults: { textAlign: 'center', marginTop: 18, color: '#999' },
+  recentTitle: { fontSize: 13, padding: 12, fontWeight: '600', marginTop: 20, color: '#275745' },
+  recentItem: { alignItems: 'center', marginRight: 12, marginTop: 12 },
   recentImage: { width: 80, height: 110, borderRadius: 8 },
   recentText: { fontSize: 13, marginTop: 4, maxWidth: 80, textAlign: "center" },
   card: {

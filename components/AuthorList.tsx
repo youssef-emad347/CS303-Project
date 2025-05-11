@@ -6,7 +6,6 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "@/firebase/firebase";
 import { backgroundColor } from "@/utils/constants";
 
-// Function to shuffle the array
 const shuffleArray = (array: any[]) => {
   return array.sort(() => Math.random() - 0.5);
 };
