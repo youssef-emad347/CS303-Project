@@ -9,27 +9,27 @@ interface Category{
   name: string;
   iconComponent:React.ReactNode;
 }
-const [categories, setCategories] = useState<Category[]>([]);
+// const [categories, setCategories] = useState<Category[]>([]);
 
-useEffect(() => {
-  const categoriesRef = collection(db, "categories");
-  const unsubscribe = onSnapshot(
-    categoriesRef,
-    (snapshot) => {
-      const categoriesData: Category[] = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as Category[];
+// useEffect(() => {
+//   const categoriesRef = collection(db, "categories");
+//   const unsubscribe = onSnapshot(
+//     categoriesRef,
+//     (snapshot) => {
+//       const categoriesData: Category[] = snapshot.docs.map((doc) => ({
+//         id: doc.id,
+//         ...doc.data(),
+//       })) as Category[];
 
-      setCategories(categoriesData);
-    },
-    (error) => {
-      console.error("Error fetching categories from Firestore:", error);
-    }
-  );
+//       setCategories(categoriesData);
+//     },
+//     (error) => {
+//       console.error("Error fetching categories from Firestore:", error);
+//     }
+//   );
 
-  return () => unsubscribe();
-}, []);
+//   return () => unsubscribe();
+// }, []);
 
 
 
@@ -56,7 +56,7 @@ const CategoryCard: React.FC<Category> = ({
 
 const styles = StyleSheet.create({
   card: {
-    width: 210,
+    width: "46%",
     height: 210,
     backgroundColor: 'transparent',
     borderWidth: 1,

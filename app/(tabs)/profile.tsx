@@ -13,6 +13,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { useRouter } from "expo-router";
 import { backgroundColor, mainColor } from "../../utils/constants";
 import { logout } from "@/services/authServices";
+import { auth } from "@/firebase/firebase";
 
 interface MenuItemProps {
   icon: string;
@@ -22,6 +23,7 @@ interface MenuItemProps {
 }
 const ProfileScreen = () => {
   const router = useRouter();
+  const currentUser = auth.currentUser;
 
   const handleLogout = async () => {
     Alert.alert(
@@ -66,7 +68,7 @@ const ProfileScreen = () => {
             }} // Replace with actual image URL
             style={styles.profileImage}
           />
-          <Text style={styles.name}>Asmaa Galal</Text>
+          <Text style={styles.name}>{currentUser.displayName}</Text>
           <Text style={styles.subtitle}>Today a reader, tomorrow a leader</Text>
         </View>
       </View>
