@@ -19,8 +19,14 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "package": "com.BooXore.app",
       "permissions": [
-        "RECORD_AUDIO"
+        "CAMERA",
+        "RECORD_AUDIO",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
       ]
     },
     "web": {
@@ -30,6 +36,7 @@
     },
     "plugins": [
       "expo-router",
+      "expo-camera",
       [
         "expo-splash-screen",
         {
@@ -48,8 +55,9 @@
         "origin": false
       },
       "eas": {
-        "projectId": "e7bcae58-9c42-4522-83d0-5f5f1f97a2ae"
+        "projectId": "ff22501d-5704-479d-a757-042671497372"
       }
     }
   }
 }
+

@@ -3,6 +3,7 @@ import { View, Text, Image, StyleSheet, Pressable } from "react-native";
 import del from "@/assets/del.png";
 import { backgroundColor, borderWidth, mainColor } from "@/utils/constants";
 import fallback from '@/assets/FallBack.png';
+import { router } from "expo-router";
 
 interface ProductProps {
   id: string;
@@ -11,7 +12,10 @@ interface ProductProps {
   description: string;
   price: string;
   imageUrl: string;
+  quantity: number;
   onDelete: (id: string) => void;
+  onIncrement: (id: string) => void;
+  onDecrement: (id: string) => void;
 }
 
 const CartItem: React.FC<ProductProps> = ({
@@ -21,24 +25,18 @@ const CartItem: React.FC<ProductProps> = ({
   price,
   description,
   imageUrl,
+  quantity,
   onDelete,
+  onIncrement,
+  onDecrement
 }) => {
-  const [quantity, setQuantity] = useState(1);
-  // const handleDelete = () => {
-  //   Alert.alert("Delete Item", "Are you sure you want to delete this item?", [
-  //     {
-  //       text: "Cancel",
-  //       style: "cancel",
-  //     },
-  //     { text: "OK", onPress: () => onDelete(id) },
-  //   ]);
-  // };
+  
   return (
     <View style={styles.card}>
       <Image source={ imageUrl ? {uri : imageUrl} : fallback } style={styles.image} />
 
-      <View style={styles.innerContainer}>
-        <View style={styles.content}>
+      <Pressable style={styles.innerContainer} onPress={() => router.push(`/book/${id}`)}>
+        <View style={styles.content} >
           <Text style={styles.title}>{name}</Text>
           <Text style={styles.author}>{author}</Text>
           <Text style={styles.description}>{description}</Text>
@@ -46,7 +44,7 @@ const CartItem: React.FC<ProductProps> = ({
           <View style={styles.buttonContainer}>
           <Pressable
             style={styles.button}
-            onPress={() => setQuantity((q) => Math.max(1, q - 1))}
+            onPress={() => onDecrement}
           >
             <Text style={styles.buttonText}>-</Text>
           </Pressable>
@@ -55,15 +53,16 @@ const CartItem: React.FC<ProductProps> = ({
 
           <Pressable
             style={styles.button}
-            onPress={() => setQuantity((q) => q + 1)}
+            onPress={() => onIncrement}
           >
             <Text style={styles.buttonText}>+</Text>
           </Pressable>
 
         </View>
-        </View>
+        
         
       </View>
+      </Pressable>
       <Pressable style={styles.deleteButton} onPress={() => onDelete(id)}>
             <Image source={del} style={{ width: 20, height: 20 }}></Image>
           </Pressable>
