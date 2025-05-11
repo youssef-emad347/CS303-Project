@@ -1,21 +1,4 @@
-import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  FlatList,
-  StyleSheet,
-  ActivityIndicator,
-  Pressable,
-  Image,
-} from "react-native";
-import { db } from "@/firebase/firebase";
-import { collection, getDocs } from "firebase/firestore";
-import Icon from "react-native-vector-icons/FontAwesome";
-import { Book } from "@/utils/types";
-import fallback from "@/assets/FallBack.png";
-import { router } from "expo-router";
-import { backgroundColor,borderWidth,mainColor } from "@/utils/constants"
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, FlatList, StyleSheet, ActivityIndicator, Pressable, Image } from 'react-native';
 import { db } from '@/firebase/firebase';
 import { collection, getDocs } from 'firebase/firestore';
@@ -30,11 +13,10 @@ type Book = {
   isbn13?: string;
   categories?: string | string[];
   publishDate?: string;
-
 };
 
 const Search = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [results, setResults] = useState<Book[]>([]);
   const [loading, setLoading] = useState(false);
   const [recentSearches, setRecentSearches] = useState<Book[]>([]);
@@ -61,7 +43,7 @@ const Search = () => {
   }, [lastClickedBook, allBooks]);
 
   const updateSuggestedBooks = (book: Book) => {
-    if (!book.categories || (Array.isArray(book.categories) && book.categories.length === 0)) {
+    if (!book.categories ||  (Array.isArray(book.categories) && book.categories.length === 0)) {
       setSuggestedBooks([]);
       return;
     }
@@ -106,7 +88,6 @@ const Search = () => {
 
     try {
       const booksRef = collection(db, 'books');
-
       const snapshot = await getDocs(booksRef);
 
       const books = snapshot.docs
@@ -117,7 +98,7 @@ const Search = () => {
 
       setResults(books);
     } catch (error) {
-      console.error("Error searching books:", error);
+      console.error('Error searching books:', error);
     }
 
     setLoading(false);
@@ -144,13 +125,8 @@ const Search = () => {
           value={searchQuery}
           onChangeText={setSearchQuery}
         />
-        <Pressable onPress={() => console.log("Voice search")}>
-          <Icon
-            name="microphone"
-            size={20}
-            color="#275745"
-            style={styles.voiceIcon}
-          />
+        <Pressable onPress={() => console.log('Voice search')}>
+          <Icon name="microphone" size={20} color="#275745" style={styles.voiceIcon} />
         </Pressable>
       </View>
 
@@ -209,13 +185,12 @@ const Search = () => {
               />
             </>
           )}
-
         </>
       )}
 
       {loading ? (
         <ActivityIndicator size="large" color="#0000ff" />
-      ) : results.length === 0 && searchQuery.trim() !== "" ? (
+      ) : results.length === 0 && searchQuery.trim() !== '' ? (
         <Text style={styles.noResults}>
           Sorry, we couldn't find any books matching your search..
         </Text>
@@ -225,11 +200,7 @@ const Search = () => {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
             <View style={styles.resultItem}>
-              <SearchItem
-                docID={item.docID}
-                title={item.title}
-                authors={item.authors}
-                cover={item.cover}
+              <Pressable
                 onPress={() => {
                   setSearchQuery(item.title);
                   addToRecentSearches(item);
@@ -240,7 +211,6 @@ const Search = () => {
                 {item.price && <Text>price: {item.price}</Text>}
                 {item.description && <Text>description: {item.description}</Text>}
               </Pressable>
-
             </View>
           )}
         />
@@ -251,15 +221,14 @@ const Search = () => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 16, backgroundColor: '#fff' },
-
   searchContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     borderWidth: 2,
-    borderColor: "#ccc",
+    borderColor: '#ccc',
     borderRadius: 30,
     paddingHorizontal: 12,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: '#f5f5f5',
     marginBottom: 10,
   },
   searchInput: {
@@ -275,7 +244,7 @@ const styles = StyleSheet.create({
   },
   resultItem: {
     padding: 12,
-    borderBottomColor: "#eee",
+    borderBottomColor: '#eee',
     borderBottomWidth: 1,
   },
   bookTitle: { fontSize: 18 },
@@ -284,90 +253,7 @@ const styles = StyleSheet.create({
   recentTitle: { fontSize: 13, padding: 12, fontWeight: '600', marginTop: 20, color: '#275745' },
   recentItem: { alignItems: 'center', marginRight: 12, marginTop: 12 },
   recentImage: { width: 80, height: 110, borderRadius: 8 },
-  recentText: { fontSize: 13, marginTop: 4, maxWidth: 80, textAlign: "center" },
-  card: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    padding: 10,
-    marginVertical: 5,
-    marginHorizontal: 10,
-    backgroundColor: backgroundColor,
-    borderWidth: borderWidth,
-    borderRadius: 10,
-  },
-  image: {
-    width: 100,
-    height: 150,
-    borderRadius: 5,
-    margin: 10,
-    marginRight: 25,
-  },
-  innerContainer: {
-    flexDirection: "column",
-    flex: 1,
-    marginLeft: 10,
-  },
-  content: {
-    flex: 1,
-    width: "100%",
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: mainColor,
-  },
-  author: {
-    fontSize: 14,
-    color: mainColor,
-    opacity: 0.7,
-    marginBottom: 5,
-  },
-  description: {
-    fontSize: 13,
-    color: mainColor,
-    opacity: 0.5,
-    marginBottom: 5,
-  },
-  price: {
-    fontSize: 17,
-    fontWeight: "bold",
-    color: mainColor,
-    marginBottom: 10,
-  },
-  buttonContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    bottom: 5,
-    left: 20,
-  },
-  button: {
-    width: 30,
-    height: 30,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: backgroundColor,
-    borderColor: mainColor,
-    borderWidth: 1.5,
-    borderRadius: 8,
-    borderBottomLeftRadius: 0,
-    marginHorizontal: 10,
-  },
-  buttonText: {
-    fontSize: 20,
-    color: mainColor,
-    fontWeight: "bold",
-  },
-  quantity: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#333",
-  },
-  deleteButton: {
-    marginLeft: 10,
-    padding: 5,
-    opacity: 0.2,
-  },
+  recentText: { fontSize: 13, marginTop: 4, maxWidth: 80, textAlign: 'center' },
 });
 
 export default Search;

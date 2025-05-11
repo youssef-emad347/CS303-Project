@@ -25,7 +25,7 @@ const CategoriesData: Category[] = [
 
 export default function CategoriesScreen() {
   return (
-    <ScrollView style={styles.screenContainer}>
+    <View style={styles.screenContainer}>
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headerText}>Categories</Text>
@@ -58,7 +58,7 @@ export default function CategoriesScreen() {
           contentContainerStyle={styles.listContent}
         />
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
